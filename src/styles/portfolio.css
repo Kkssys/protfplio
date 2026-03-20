@@ -196,6 +196,13 @@ body {
   font-size: 2rem;
   box-shadow: var(--shadow);
 }
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* Image covers entire area, may crop sides */
+  object-position: center;
+}
+
 .btn-disabled {
   opacity: 0.6;
   cursor: not-allowed;

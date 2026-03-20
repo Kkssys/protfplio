@@ -1,3 +1,9 @@
+import food from "../assets/food.jpg";
+import ff from "../assets/ff.jpg";
+import movie from "../assets/movie.jpg";
+
+
+
 export const personalInfo = {
   name: "Dinesh G",
   title: "Computer Science Student",
@@ -51,26 +57,26 @@ export const projects = [
     title: "Digital Food Donation & Redistribution Platform",
     description: "Built a real-time web platform to reduce food waste by connecting donors, volunteers, and recipients using location-based matching, OTP verification, and live tracking .",
     technologies: ["React", "Node.js", "MongoDB", "Express.js"],
-    github: "https://github.com/alexjohnson/taskflow",
-    demo: "https://taskflow-demo.netlify.app",
-    image: "project1.jpg"
+    // github:",
+    // demo: "https://taskflow-demo.netlify.app",
+    image: food
   },
   {
     id: 2,
     title: "Fake face detection",
     description: "Fake face detection using Machine Learning (ML) is the process of identifying whether a given image of areal (captured from an actual person) or fake (AI-generated).",
     technologies: ["Python", "HTML5", "CSS3", "API Integration"],
-    github: "https://github.com/alexjohnson/weather-dashboard",
-    demo: "https://weather-dashboard-demo.netlify.app",
-    image: "project2.jpg"
+    // github: "https://github.com/alexjohnson/weather-dashboard",
+    // demo: "https://weather-dashboard-demo.netlify.app",
+    image: ff
   },
   {
     id: 3,
     title: "Movie Ticket Booking System",
     description: "Developed a web application that enables users to book movie tickets with real-time seat availability and scheduling features.",
     technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
-    github: "https://github.com/alexjohnson/ecotrack",
-    demo: "https://ecotrack-demo.netlify.app",
-    image: "project3.jpg"
+    // github: "https://github.com/alexjohnson/ecotrack",
+    // demo: "https://ecotrack-demo.netlify.app",
+    image: movie
   }
 ];

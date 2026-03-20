@@ -30,9 +30,17 @@ function Projects({ projects }) {
           {filteredProjects.map((project) => (
             <div key={project.id} className="project-card">
               <div className="project-image">
-                <div className="image-placeholder">
-                  <span>{project.title.charAt(0)}</span>
-                </div>
+                {/* Replace placeholder with actual image */}
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  onError={(e) => {
+                    // Fallback if image fails to load
+                    e.target.onerror = null;
+                    e.target.style.display = 'none';
+                    e.target.parentElement.innerHTML = `<div class="image-placeholder"><span>${project.title.charAt(0)}</span></div>`;
+                  }}
+                />
               </div>
               <div className="project-content">
                 <h3 className="project-title">{project.title}</h3>
@@ -42,14 +50,19 @@ function Projects({ projects }) {
                     <span key={index} className="tech-tag">{tech}</span>
                   ))}
                 </div>
-                <div className="project-links">
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-small">
-                    Code
-                  </a>
-                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-secondary">
-                    Demo
-                  </a>
-                </div>
+                {/* Optional: Add links if you have them */}
+                {/* <div className="project-links">
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-small">
+                      Code
+                    </a>
+                  )}
+                  {project.demo && (
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-secondary">
+                      Demo
+                    </a>
+                  )}
+                </div> */}
               </div>
             </div>
           ))}
