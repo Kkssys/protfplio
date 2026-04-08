@@ -1,7 +1,7 @@
 import food from "../assets/food.jpg";
 import ff from "../assets/ff.jpg";
 import movie from "../assets/movie.jpg";
-
+import cric from "../assets/download.jpg"
 
 
 export const personalInfo = {
@@ -78,5 +78,14 @@ export const projects = [
      github: "https://github.com/Kkssys/movie",
     demo: "https://movie-inky-phi.vercel.app",
     image: movie
+  },
+   {
+    id: 4,
+    title: "Cricket Scorecard",
+    description: "Built a real-time web platform to reduce food waste by connecting donors, volunteers, and recipients using location-based matching, OTP verification, and live tracking .",
+    technologies: ["React", "HTML", "CSS", "BootStrap"],
+    github:"https://github.com/Kkssys/scoreboard",
+    demo: "https://scoreboard-seven-rho.vercel.app",
+    image: cric
   }
 ];
