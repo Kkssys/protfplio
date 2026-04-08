@@ -25,7 +25,7 @@ function Hero({ personalInfo }) {
           </div>
           <div className="hero-image">
             <div className="image-placeholder">
-              <span>CS Student</span>
+              <span>Web Developer</span>
             </div>
           </div>
         </div>

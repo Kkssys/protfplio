@@ -51,7 +51,7 @@ function Projects({ projects }) {
                   ))}
                 </div>
                 {/* Optional: Add links if you have them */}
-                {/* <div className="project-links">
+                { <div className="project-links">
                   {project.github && (
                     <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-small">
                       Code
@@ -62,7 +62,7 @@ function Projects({ projects }) {
                       Demo
                     </a>
                   )}
-                </div> */}
+                </div> }
               </div>
             </div>
           ))}

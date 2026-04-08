@@ -186,7 +186,7 @@ body {
 
 .hero-image .image-placeholder {
   width: 100%;
-  height: 400px;
+  height: 100px;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   border-radius: 1rem;
   display: flex;
