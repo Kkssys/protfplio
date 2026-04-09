@@ -2,6 +2,7 @@ import food from "../assets/food.jpg";
 import ff from "../assets/ff.jpg";
 import movie from "../assets/movie.jpg";
 import cric from "../assets/download.jpg"
+import shop from "../assets/shop.jpg"
 
 
 export const personalInfo = {
@@ -82,10 +83,19 @@ export const projects = [
    {
     id: 4,
     title: "Cricket Scorecard",
-    description: "Built a real-time web platform to reduce food waste by connecting donors, volunteers, and recipients using location-based matching, OTP verification, and live tracking .",
-    technologies: ["React", "HTML", "CSS", "BootStrap"],
+    description: "A user-friendly cricket score calculator that tracks runs, wickets, extras, and overs in real-time with an interactive ball-by-ball input interface.",
+    technologies: ["React", "HTML5", "CSS3", "BootStrap"],
     github:"https://github.com/Kkssys/scoreboard",
     demo: "https://scoreboard-seven-rho.vercel.app",
     image: cric
+  },
+  {
+    id: 5,
+    title: "E-Commerce websitr",
+    description: "A full-stack e-commerce React application with product listing, cart, user authentication, checkout validation, and persistent order history.",
+    technologies: ["React", "HTML5", "CSS3", "BootStrap"],
+    github:"https://github.com/Kkssys/GD-shop",
+    demo: "https://gd-shop.vercel.app",
+    image: shop
   }
 ];
