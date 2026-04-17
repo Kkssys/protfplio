@@ -58,8 +58,8 @@ export const projects = [
     title: "Digital Food Donation & Redistribution Platform",
     description: "Built a real-time web platform to reduce food waste by connecting donors, volunteers, and recipients using location-based matching, OTP verification, and live tracking .",
     technologies: ["React", "Node.js", "MongoDB", "Express.js"],
-    // github:",
-    // demo: "https://taskflow-demo.netlify.app",
+     github:"",
+     demo: "https://food-d-ozyb.onrender.com/",
     image: food
   },
   {
