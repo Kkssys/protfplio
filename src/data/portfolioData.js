@@ -3,7 +3,7 @@ import ff from "../assets/ff.jpg";
 import movie from "../assets/movie.jpg";
 import cric from "../assets/download.jpg"
 import shop from "../assets/shop.jpg"
-
+import image from "../assets/images.jpg"
 
 export const personalInfo = {
   name: "Dinesh G",
@@ -91,11 +91,20 @@ export const projects = [
   },
   {
     id: 5,
-    title: "E-Commerce websitr",
+    title: "E-Commerce website",
     description: "A full-stack e-commerce React application with product listing, cart, user authentication, checkout validation, and persistent order history.",
     technologies: ["React", "HTML5", "CSS3", "BootStrap"],
     github:"https://github.com/Kkssys/GD-shop",
     demo: "https://gd-shop.vercel.app",
     image: shop
+  },
+   {
+    id: 6,
+    title: "GD Photo-editer",
+    description: "A browser-based image editor built with React and Canvas API that supports drag-and-drop upload, cropping, resizing, filters, brightness/contrast adjustment, and PNG/JPEG export.",
+    technologies: ["React", "HTML5", "CSS3", "API"],
+    github:"https://github.com/Kkssys/photo-editer",
+    demo: "https://gd-photo-editer.vercel.app",
+    image: image
   }
 ];
