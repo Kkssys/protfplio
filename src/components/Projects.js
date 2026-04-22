@@ -14,7 +14,7 @@ function Projects({ projects }) {
       <div className="container">
         <h2 className="section-title">My Projects</h2>
         
-        <div className="project-filters">
+        {/* <div className="project-filters">
           {technologies.map((tech, index) => (
             <button
               key={index}
@@ -24,7 +24,7 @@ function Projects({ projects }) {
               {tech}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className="projects-grid">
           {filteredProjects.map((project) => (
