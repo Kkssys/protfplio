@@ -260,6 +260,169 @@ section {
   box-shadow: var(--shadow);
   transition: transform 0.3s;
 }
+/* Dark Mode Styles */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --text-color: #1f2937;
+  --light-text: #6b7280;
+  --background: #ffffff;
+  --light-background: #f3f4f6;
+  --border-color: #e5e7eb;
+  --card-background: #ffffff;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+body.dark-mode {
+  --primary-color: #60a5fa;
+  --secondary-color: #3b82f6;
+  --text-color: #f3f4f6;
+  --light-text: #9ca3af;
+  --background: #111827;
+  --light-background: #1f2937;
+  --border-color: #374151;
+  --card-background: #1f2937;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+
+/* Apply dark mode colors */
+body {
+  background-color: var(--background);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header dark mode */
+.header {
+  background: var(--background);
+  box-shadow: var(--shadow);
+}
+
+/* Card dark mode */
+.experience-card,
+.project-card {
+  background: var(--card-background);
+  border-color: var(--border-color);
+}
+
+/* Technology tags dark mode */
+.tech-tag {
+  background: var(--light-background);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+/* Form dark mode */
+.contact-form,
+.form-group input,
+.form-group textarea {
+  background: var(--card-background);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.1);
+}
+
+/* Footer dark mode */
+.footer {
+  background: var(--text-color);
+}
+
+.footer-info p {
+  color: var(--light-text);
+}
+
+/* Theme Toggle Button Styles */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+}
+
+.theme-toggle:hover {
+  background: var(--light-background);
+  transform: rotate(15deg);
+}
+
+.theme-icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-color);
+  fill: none;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .theme-icon {
+  stroke: var(--text-color);
+}
+
+/* Smooth transitions for all elements */
+* {
+  transition: background-color 0.3s ease, 
+              border-color 0.3s ease, 
+              color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Filter buttons dark mode */
+.filter-btn {
+  background: var(--background);
+  color: var(--text-color);
+  border-color: var(--border-color);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Hero section dark mode */
+.hero {
+  background: linear-gradient(135deg, var(--light-background) 0%, var(--background) 100%);
+}
+
+/* Image placeholder dark mode */
+.image-placeholder {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Scrollbar dark mode (optional) */
+body.dark-mode::-webkit-scrollbar {
+  width: 10px;
+}
+
+body.dark-mode::-webkit-scrollbar-track {
+  background: var(--light-background);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 5px;
+}
+
+
+body.dark-mode::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+}
 
 .experience-card:hover {
   transform: translateY(-5px);

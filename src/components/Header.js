@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 function Header({ personalInfo }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,12 +24,15 @@ function Header({ personalInfo }) {
             {personalInfo.name.split(' ').map(n => n[0]).join('')}
           </a>
         </div>
-        
-        <button className="mobile-menu-btn" onClick={toggleMenu}>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </button>
+{/*         
+        <div className="header-controls">
+          <ThemeToggle />
+          <button className="mobile-menu-btn" onClick={toggleMenu}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </button>
+        </div> */}
 
         <nav className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
           <ul>
@@ -38,6 +42,14 @@ function Header({ personalInfo }) {
             <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}>Contact</a></li>
           </ul>
         </nav>
+           <div className="header-controls">
+          <ThemeToggle />
+          <button className="mobile-menu-btn" onClick={toggleMenu}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </button>
+        </div>
       </div>
     </header>
   );
