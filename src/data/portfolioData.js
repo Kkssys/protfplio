@@ -4,6 +4,7 @@ import movie from "../assets/movie.jpg";
 import cric from "../assets/download.jpg"
 import shop from "../assets/shop.jpg"
 import image from "../assets/images.jpg"
+import chat from "../assets/chat.png"
 
 export const personalInfo = {
   name: "Dinesh G",
@@ -64,18 +65,18 @@ export const projects = [
   },
   {
     id: 2,
-    title: "Fake face detection",
-    description: "Fake face detection using Machine Learning (ML) is the process of identifying whether a given image of areal (captured from an actual person) or fake (AI-generated).",
-    technologies: ["Python", "HTML5", "CSS3", "API Integration"],
-    // github: "https://github.com/alexjohnson/weather-dashboard",
-    // demo: "https://weather-dashboard-demo.netlify.app",
-    image: ff
+    title: "Uraiyadal-chat app",
+    description: "Uraiyadal is a real-time MERN stack chat application featuring OTP email verification, private messaging, friend requests, block/unblock users, read receipts, media sharing, dark mode, and responsive mobile design.",
+    technologies: ["MongoDB",  "Express.js","React", "Node.js"],
+     github: "https://github.com/Kkssys/Uraiyadal",
+     demo: "https://uraiyadal-chat.netlify.app/",
+    image: chat
   },
   {
     id: 3,
     title: "Movie Ticket Booking System",
     description: "Developed a web application that enables users to book movie tickets with real-time seat availability and scheduling features.",
-    technologies: ["PHP", "MySQL", "Bootstrap", "JavaScript"],
+    technologies: ["PHP", "MySQL", "JavaScript"],
      github: "https://github.com/Kkssys/movie",
     demo: "https://movie-inky-phi.vercel.app",
     image: movie
@@ -84,7 +85,7 @@ export const projects = [
     id: 4,
     title: "Cricket Scorecard",
     description: "A user-friendly cricket score calculator that tracks runs, wickets, extras, and overs in real-time with an interactive ball-by-ball input interface.",
-    technologies: ["React", "HTML5", "CSS3", "BootStrap"],
+    technologies: ["React", "HTML5", "CSS3"],
     github:"https://github.com/Kkssys/scoreboard",
     demo: "https://scoreboard-seven-rho.vercel.app",
     image: cric
@@ -106,5 +107,14 @@ export const projects = [
     github:"https://github.com/Kkssys/photo-editer",
     demo: "https://gd-photo-editer.vercel.app",
     image: image
+  },
+   {
+    id: 7,
+    title: "Fake face detection",
+    description: "Fake face detection using Machine Learning (ML) is the process of identifying whether a given image of areal (captured from an actual person) or fake (AI-generated).",
+    technologies: ["Python", "HTML5", "CSS3", "API"],
+    // github: "https://github.com/alexjohnson/weather-dashboard",
+    // demo: "https://weather-dashboard-demo.netlify.app",
+    image: ff
   }
 ];
