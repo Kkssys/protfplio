@@ -19,6 +19,16 @@ export const personalInfo = {
 export const experiences = [
   {
     id: 1,
+    company: "Wizbees",
+    position: "Web Developer Intern",
+    duration: "June 2024 - July 2024",
+    description: [
+      "Developed and maintained responsive web pages using React, HTML, CSS, and JavaScript.",
+        "Assisted in UI development and debugging."],
+    technologies: ["React" , "HTML" , "CSS" , "JavaScript", "Git" , "Mongo DB" ,"Node JS" , "Express JS"]
+  },
+  {
+    id: 2,
     company: "SPIC Pvt Ltd",
     position: "SAP Consultangt Intern",
     duration: "March 2023 - April 2023",
