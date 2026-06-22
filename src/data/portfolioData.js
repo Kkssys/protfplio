@@ -5,6 +5,8 @@ import cric from "../assets/download.jpg"
 import shop from "../assets/shop.jpg"
 import image from "../assets/images.jpg"
 import chat from "../assets/chat.png"
+import fashion from "../assets/fashion.jpg"
+import xo from "../assets/xo.jpg"
 
 export const personalInfo = {
   name: "Dinesh G",
@@ -126,5 +128,23 @@ export const projects = [
     // github: "https://github.com/alexjohnson/weather-dashboard",
     // demo: "https://weather-dashboard-demo.netlify.app",
     image: ff
+  },
+  {
+    id: 8,
+    title: "Fashion store",
+    description: "FashionStore is a full-stack MERN ecommerce platform for buying and selling clothing with secure authentication, product browsing, cart management, and payment processing.",
+    technologies: ["MongoDB",  "Express.js","React", "Node.js" ,"Razorpay" ],
+     github: "https://github.com/Kkssys/cloth",
+    // demo: "https://weather-dashboard-demo.netlify.app",
+    image: fashion
+  },
+  {
+    id: 9,
+    title: "XO game",
+    description: "Real time multiplayer TicTacToe with room codes, player names, alternating first moves, win celebrations, and a responsive UI built with React + Socket.IO.",
+    technologies: ["Express.js","React", "Node.js" ,"Socket io" ],
+    github: "https://github.com/Kkssys/xo",
+    demo: "https://xox-o.netlify.app/",
+    image: xo
   }
 ];
