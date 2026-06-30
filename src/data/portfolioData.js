@@ -7,6 +7,7 @@ import image from "../assets/images.jpg"
 import chat from "../assets/chat.png"
 import fashion from "../assets/fashion.jpg"
 import xo from "../assets/xo.jpg"
+import snake from "../assets/snake.png"
 
 export const personalInfo = {
   name: "Dinesh G",
@@ -122,12 +123,12 @@ export const projects = [
   },
    {
     id: 7,
-    title: "Fake face detection",
-    description: "Fake face detection using Machine Learning (ML) is the process of identifying whether a given image of areal (captured from an actual person) or fake (AI-generated).",
+    title: "Snake game",
+    description: "A classic Snake Game built with React, featuring player profiles, high-score tracking, and responsive design. The snake grows longer as it eats food, and the game ends when you hit a wall or your own tail.",
     technologies: ["Python", "HTML5", "CSS3", "API"],
-    // github: "https://github.com/alexjohnson/weather-dashboard",
-    // demo: "https://weather-dashboard-demo.netlify.app",
-    image: ff
+     github: "https://github.com/Kkssys/snake",
+     demo: "https://snake-blue-nu-23.vercel.app/",
+    image: snake
   },
   {
     id: 8,
