@@ -14,6 +14,7 @@ export const personalInfo = {
   title: "Web Developer | Computer Science Student",
   email: "dineshgovindaraj212@gmail.com",
   location: "Thoothukudi, Tamil Nadu , India",
+   phone: "+91 9025927823",
   github: "https://github.com/Kkssys",
   linkedin: "https://www.linkedin.com/in/dinesh-g-388174259/",
   bio: "Motivated Computer Science student with a proactive mindset and a strong passion for continuous learning. I am  skilled in adapting to new technologies, solving complex problems, and working effectively both independently and as part of a team."

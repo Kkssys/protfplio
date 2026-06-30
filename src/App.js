@@ -7,6 +7,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { personalInfo, experiences, projects } from './data/portfolioData';
+import Chatbot from './components/Chatbot';  // ← Import
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Contact personalInfo={personalInfo} />
         </main>
         <Footer personalInfo={personalInfo} />
+        <Chatbot /> 
       </div>
     </ThemeProvider>
   );
