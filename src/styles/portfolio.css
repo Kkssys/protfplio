@@ -661,7 +661,7 @@ body.dark-mode::-webkit-scrollbar-thumb:hover {
 }
 
 .footer-links a {
-  color: white;
+  color: rgb(92, 90, 90);
   text-decoration: none;
   transition: color 0.3s;
 }
