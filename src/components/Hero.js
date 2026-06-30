@@ -12,6 +12,9 @@ function Hero({ personalInfo }) {
             <div className="hero-buttons">
               <a href="#contact" className="btn btn-primary">Get In Touch</a>
               <a href="#projects" className="btn btn-secondary">View Projects</a>
+                <a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" className="btn btn-secondary">
+        <i class="bi bi-file-earmark-arrow-down"></i> Resume
+  </a>
             </div>
             <div className="social-links">
               <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="social-link">

@@ -42,7 +42,21 @@ function Header({ personalInfo }) {
             <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}>Contact</a></li>
           </ul>
         </nav>
+          
            <div className="header-controls">
+
+        
+        <a 
+            href="/Dinesh_Resume.pdf" 
+            download="Dinesh_Resume.pdf"
+            className="btn-resume"
+            aria-label="Download Resume"
+            
+          >
+             <i class="bi bi-file-earmark-arrow-down"></i>
+             Resume
+          </a>
+
           <ThemeToggle />
           <button className="mobile-menu-btn" onClick={toggleMenu}>
             <span className="bar"></span>

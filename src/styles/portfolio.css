@@ -890,3 +890,37 @@ body.dark-mode::-webkit-scrollbar-thumb:hover {
     width: 20px;
   }
 }
+
+/* Resume button */
+.btn-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-resume:hover {
+  background: var(--secondary-color);
+  transform: scale(1.05);
+}
+
+.btn-resume:active {
+  transform: scale(0.95);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .btn-resume {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
