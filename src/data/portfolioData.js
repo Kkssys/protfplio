@@ -34,7 +34,7 @@ export const experiences = [
   {
     id: 2,
     company: "SPIC Pvt Ltd",
-    position: "SAP Consultangt Intern",
+    position: "SAP Consultant Intern",
     duration: "March 2023 - April 2023",
     description: [
       "Experienced SAP Product Management professional with expertise in managing end-to-end SAP product lifecycle and gained kownlodge in MM (Material Management)."

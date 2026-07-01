@@ -53,7 +53,7 @@ function Header({ personalInfo }) {
             aria-label="Download Resume"
             
           >
-             <i class="bi bi-file-earmark-arrow-down"></i>
+             <i className="bi bi-file-earmark-arrow-down"></i>
              Resume
           </a>
 
