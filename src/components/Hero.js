@@ -6,7 +6,8 @@ function Hero({ personalInfo }) {
       <div className="container">
         <div className="hero-content">
           <div className="hero-text">
-            <h1>Hi, I'm <span className="highlight">{personalInfo.name}</span></h1>
+            <h1>Hi,</h1>
+            <h1> I'm <span className="highlight">{personalInfo.name}</span></h1>
             <h2>{personalInfo.title}</h2>
             <p className="hero-bio">{personalInfo.bio}</p>
             <div className="hero-buttons">
