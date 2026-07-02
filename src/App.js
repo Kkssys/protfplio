@@ -6,6 +6,7 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Skills from './components/Skills'; 
 import { personalInfo, experiences, projects } from './data/portfolioData';
 import Chatbot from './components/Chatbot';  // ← Import
 
@@ -16,6 +17,7 @@ function App() {
         <Header personalInfo={personalInfo} />
         <main>
           <Hero personalInfo={personalInfo} />
+            <Skills /> 
           <Experience experiences={experiences} />
           <Projects projects={projects} />
           <Contact personalInfo={personalInfo} />

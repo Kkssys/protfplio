@@ -1,4 +1,5 @@
 import React from 'react';
+import StarButton from './StarButton';
 
 function Footer({ personalInfo }) {
   const currentYear = new Date().getFullYear();
@@ -10,6 +11,10 @@ function Footer({ personalInfo }) {
           <div className="footer-info">
             <p>&copy; {currentYear} {personalInfo.name}. All rights reserved.</p>
             <p>Computer Science Student Portfolio</p>
+          </div>
+          
+           <div className="footer-center">
+            <StarButton />
           </div>
           
           <div className="footer-links">
