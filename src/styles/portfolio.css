@@ -1414,8 +1414,8 @@ body.dark-mode .skills-section::after {
 .skill-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.5rem;
+  gap: 1rem;              /* Increased from 0.75rem */
+  padding: 0.8rem 1.8rem; /* Increased padding */
   background: var(--card-background);
   border-radius: 50px;
   box-shadow: var(--shadow);
@@ -1432,14 +1432,14 @@ body.dark-mode .skills-section::after {
 }
 
 .skill-icon {
-  font-size: 1.8rem;
+  font-size: 2.5rem;     /* Increased from 1.8rem */
   display: flex;
   align-items: center;
   line-height: 1;
 }
 
 .skill-name {
-  font-size: 1rem;
+  font-size: 1.2rem;     /* Increased from 1rem */
   font-weight: 600;
   color: var(--text-color);
 }
@@ -1465,10 +1465,9 @@ body.dark-mode .skills-section::after {
     gap: 0.5rem;
   }
   
-  .skill-icon {
-    font-size: 1.2rem;
-  }
-  
+ .skill-icon {
+  font-size: 2.5rem;  /* Increase this value - default was 1.8rem */
+}
   .skill-name {
     font-size: 0.8rem;
   }
