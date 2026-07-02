@@ -1,29 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import Skills from './components/Skills'; 
+import Chatbot from './components/Chatbot';
+import WelcomeScreen from './components/WelcomeScreen';  // ← Import
 import { personalInfo, experiences, projects } from './data/portfolioData';
-import Chatbot from './components/Chatbot';  // ← Import
 
 function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
+
+  const handleWelcomeComplete = () => {
+    setShowWelcome(false);
+  };
+
   return (
     <ThemeProvider>
       <div className="app">
+        {/* Welcome Screen */}
+        {showWelcome && <WelcomeScreen onComplete={handleWelcomeComplete} />}
+
+        {/* Main content */}
         <Header personalInfo={personalInfo} />
         <main>
           <Hero personalInfo={personalInfo} />
-            <Skills /> 
+          <Skills />
           <Experience experiences={experiences} />
           <Projects projects={projects} />
           <Contact personalInfo={personalInfo} />
         </main>
         <Footer personalInfo={personalInfo} />
-        <Chatbot /> 
+        <Chatbot />
       </div>
     </ThemeProvider>
   );
