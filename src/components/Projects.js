@@ -54,7 +54,7 @@ function Projects({ projects }) {
     <section id="projects" className="projects">
       <div className="container">
         <h2 className="section-title">My Projects</h2>
-        
+{/*         
         <div className="project-filters">
           {technologies.map((tech, index) => (
             <button
@@ -65,7 +65,7 @@ function Projects({ projects }) {
               {tech}
             </button>
           ))}
-        </div>
+        </div> */}
 
         <div className="carousel-container">
           <button 
