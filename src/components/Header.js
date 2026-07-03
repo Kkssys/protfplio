@@ -20,9 +20,9 @@ function Header({ personalInfo }) {
     <header className="header">
       <div className="header-container">
         <div className="logo">
-          <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
-            {personalInfo.name.split(' ').map(n => n[0]).join('')}
-          </a>
+             <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
+              GD   {/* ← Hardcoded to "GD" */}
+             </a>
         </div>
 {/*         
         <div className="header-controls">

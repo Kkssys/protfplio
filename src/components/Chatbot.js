@@ -157,14 +157,14 @@ function Chatbot() {
     <div className="chatbot-container">
       {!isOpen && (
         <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
-         <i class="bi bi-chat"></i>
+         <i class="bi bi-robot"></i>
         </button>
       )}
 
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <span>🤖 Ask Me Anything</span>
+            <span>🤖 Dinesh.AI</span>
             <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 
