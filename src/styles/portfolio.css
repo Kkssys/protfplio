@@ -1124,7 +1124,36 @@ body.dark-mode .chatbot-input input {
     padding: 0.3rem 0.6rem;
   }
 }
+/* Chatbot button styles */
+.chatbot-btn {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  margin: 0.2rem 0.4rem 0.2rem 0;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+}
 
+.chatbot-btn:hover {
+  background: var(--secondary-color);
+  transform: scale(1.03);
+}
+
+.chatbot-btn:active {
+  transform: scale(0.97);
+}
+
+/* Ensure the message bubble doesn't break the layout */
+.message-bubble .chatbot-btn {
+  display: inline-block;
+  margin: 0.2rem 0.4rem 0.2rem 0;
+}
 
 
 

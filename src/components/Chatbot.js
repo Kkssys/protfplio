@@ -86,11 +86,20 @@ function Chatbot() {
       return `📄 Here's my resume: <a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" style="color: #2563eb; font-weight: bold; text-decoration: underline;">📄 Download Resume</a>`;
     }
 
-    // --- 5. PROJECTS (specific) ---
+   // --- 5. PROJECTS (specific) - WITH BUTTONS ---
     for (const project of projects) {
-      if (lower.includes(project.title.toLowerCase()) || 
-          lower.includes(project.technologies[0]?.toLowerCase())) {
-        return `📁 **${project.title}**\n${project.description}\n\nTechnologies: ${project.technologies.join(', ')}`;
+      if (lower.includes(project.title.toLowerCase())) {
+        let response = `<strong>📁 ${project.title}</strong><br><br>`;
+        response += `${project.description}<br><br>`;
+        response += `<strong>🛠️ Technologies:</strong> ${project.technologies.join(', ')}<br><br>`;
+        
+        if (project.github) {
+          response += `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="chatbot-btn">💻 Code</a> `;
+        }
+        if (project.demo) {
+          response += `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="chatbot-btn">🚀 Demo</a>`;
+        }
+        return response;
       }
     }
 
