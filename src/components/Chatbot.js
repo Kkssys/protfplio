@@ -23,7 +23,7 @@ function Chatbot() {
     // Auto-hide greeting after another 5 seconds
     const hideTimer = setTimeout(() => {
       setShowGreeting(false);
-    }, 8500); // 3500 + 5000
+    }, 5500); // 2500 + 3000
 
     return () => {
       clearTimeout(showTimer);
