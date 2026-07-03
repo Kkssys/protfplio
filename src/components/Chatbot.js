@@ -3,15 +3,40 @@ import { personalInfo, experiences, projects } from '../data/portfolioData';
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showGreeting, setShowGreeting] = useState(false);
   const [messages, setMessages] = useState([
     { 
       id: 1, 
-      text: "👋 Hi! I'm Dinesh's virtual assistant. Ask me anything about him!", 
+      text: "👋 Hi! I'm GD's AI assistant. Ask me anything about him!", 
       sender: 'bot' 
     }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
+
+  // Show greeting 3.5 seconds after page load (after welcome screen)
+  useEffect(() => {
+    const showTimer = setTimeout(() => {
+      setShowGreeting(true);
+    }, 2500); // matches welcome screen duration (~3s + 0.5s fade)
+
+    // Auto-hide greeting after another 5 seconds
+    const hideTimer = setTimeout(() => {
+      setShowGreeting(false);
+    }, 8500); // 3500 + 5000
+
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
+  // If user opens chat, hide greeting immediately
+  useEffect(() => {
+    if (isOpen) {
+      setShowGreeting(false);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -56,7 +81,7 @@ function Chatbot() {
       return `My LinkedIn profile: ${personalInfo.linkedin}`;
     }
 
-    // --- 4. RESUME / CV (NOW WITH DOWNLOAD LINK!) ---
+    // --- 4. RESUME / CV ---
     if (lower.includes('resume') || lower.includes('cv') || lower.includes('curriculum') || lower.includes('vitae')) {
       return `📄 Here's my resume: <a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" style="color: #2563eb; font-weight: bold; text-decoration: underline;">📄 Download Resume</a>`;
     }
@@ -69,7 +94,7 @@ function Chatbot() {
       }
     }
 
-    if (lower.includes('project') || lower.includes('projects') || lower.includes('built') || lower.includes('work')) {
+    if (lower.includes('project') || lower.includes('projects') || lower.includes('built') || lower.includes('developed')) {
       const projectList = projects.map(p => `• ${p.title}`).join('\n');
       return `Here are my projects:\n${projectList}\n\nWhich one would you like to know more about?`;
     }
@@ -134,7 +159,7 @@ function Chatbot() {
         id: Date.now() + 1, 
         text: botResponse, 
         sender: 'bot',
-        isHtml: botResponse.includes('<a') // flag to render HTML
+        isHtml: botResponse.includes('<a')
       };
       setMessages(prev => [...prev, botMessage]);
     }, 400);
@@ -153,18 +178,36 @@ function Chatbot() {
     "Can I see your resume?"
   ];
 
+  // Handle greeting click - open chat
+  const handleGreetingClick = () => {
+    setShowGreeting(false);
+    setIsOpen(true);
+  };
+
   return (
     <div className="chatbot-container">
+      {/* Greeting Popup - appears after welcome screen */}
+      {showGreeting && (
+        <div className="chatbot-greeting" onClick={handleGreetingClick}>
+          <div className="greeting-content">
+            <span className="greeting-emoji">🗨️</span>
+            <span className="greeting-text">Hi, I'm GD's AI</span>
+          </div>
+        </div>
+      )}
+
+      {/* Chat Button */}
       {!isOpen && (
         <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
-         <i class="bi bi-robot"></i>
+          <i class="bi bi-robot"></i>
         </button>
       )}
 
+      {/* Chat Window */}
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <span>🤖 Dinesh.AI</span>
+            <span>🤖 GD.ai</span>
             <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 
