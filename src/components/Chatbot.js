@@ -199,7 +199,7 @@ function Chatbot() {
       {showGreeting && (
         <div className="chatbot-greeting" onClick={handleGreetingClick}>
           <div className="greeting-content">
-            <span className="greeting-emoji">🗨️</span>
+            <span className="greeting-emoji"><i class="bi bi-chat-dots"></i></span>
             <span className="greeting-text">Hi, I'm GD's Asst</span>
           </div>
         </div>
