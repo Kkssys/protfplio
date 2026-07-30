@@ -11,7 +11,7 @@ import snake from "../assets/snake.png"
 
 export const personalInfo = {
   name: "Dinesh G",
-  title: "Computer Science Student | Full-Stack Developer",
+  title: "Web Developer | Full-Stack Developer",
   email: "dineshgovindaraj212@gmail.com",
   location: "Thoothukudi, Tamil Nadu , India",
    phone: "+91 9025927823",

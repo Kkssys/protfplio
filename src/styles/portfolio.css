@@ -1717,3 +1717,45 @@ body.dark-mode .chatbot-greeting::before {
   color: var(--text-color);
   white-space: nowrap;
 }
+/* Typewriter cursor blink */
+.cursor-blink {
+  display: inline-block;
+  animation: blink 0.7s step-end infinite;
+  margin-left: 2px;
+  font-weight: 300;
+  color: var(--primary-color);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Ensure the typewriter text has consistent styling */
+.typewriter-text {
+  color: var(--text-color);
+}
+
+
+
+
+.hero-image .image-placeholder {
+  width: 100%;
+  max-width: 400px;
+  height: 320px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: morphShape 8s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 60px rgba(37, 99, 235, 0.3);
+  overflow: hidden;  /* ← IMPORTANT: keeps the image inside the shape */
+}
+
+.hero-image .image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* ensures the GIF fills the area without distortion */
+  display: block;
+}
