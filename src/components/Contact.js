@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
 function Contact({ personalInfo }) {
   const formRef = useRef();
@@ -123,14 +124,28 @@ function Contact({ personalInfo }) {
                 <span className="contact-label">Location:</span>
                 <span>{personalInfo.location}</span>
               </div>
-              <div className="contact-item">
-                <span className="contact-label">GitHub:</span>
-                <a href={personalInfo.github} target="_blank" rel="noopener noreferrer">{personalInfo.github}</a>
-              </div>
-              <div className="contact-item">
-                <span className="contact-label">LinkedIn:</span>
-                <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer">{personalInfo.linkedin}</a>
-              </div>
+              <div className="social-buttons">
+              <a 
+                href={personalInfo.github} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-btn github"
+                aria-label="GitHub"
+              >
+                <FaGithub size={22} />
+                <span>GitHub</span>
+              </a>
+              <a 
+                href={personalInfo.linkedin} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="social-btn linkedin"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin size={22} />
+                <span>LinkedIn</span>
+              </a>
+            </div>
             </div>
           </div>
 

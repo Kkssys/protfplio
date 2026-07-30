@@ -13,7 +13,7 @@ export const personalInfo = {
   name: "Dinesh G",
   title: "Web Developer | Full-Stack Developer",
   email: "dineshgovindaraj212@gmail.com",
-  location: "Thoothukudi, Tamil Nadu , India",
+  location: "Thoothukudi , Tamil Nadu , India",
    phone: "+91 9025927823",
   github: "https://github.com/Kkssys",
   linkedin: "https://www.linkedin.com/in/dinesh-g-388174259/",

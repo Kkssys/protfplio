@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import About from './components/About'; 
 import Skills from './components/Skills';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
@@ -28,6 +29,7 @@ function App() {
         <Header personalInfo={personalInfo} />
         <main>
           <Hero personalInfo={personalInfo} />
+          <About /> 
           <Skills />
           <Experience experiences={experiences} />
           <Projects projects={projects} />

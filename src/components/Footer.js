@@ -10,7 +10,7 @@ function Footer({ personalInfo }) {
         <div className="footer-content">
           <div className="footer-info">
             <p>&copy; {currentYear} {personalInfo.name}. All rights reserved.</p>
-            <p>Computer Science Student Portfolio</p>
+            <p>Web Developer's Portfolio</p>
           </div>
           
           <div className="footer-links">
