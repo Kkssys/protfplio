@@ -47,7 +47,8 @@ function Hero({ personalInfo }) {
       <div className="container">
         <div className="hero-content">
           <div className="hero-text">
-            <h1>Hi, I'm <span className="highlight">{personalInfo.name}</span></h1>
+            <h1>Hi, I'm </h1>
+            <h1 className="highlight">{personalInfo.name}</h1>
             <h2>
               <span className="typewriter-text">{displayText}</span>
               <span className="cursor-blink">|</span>
