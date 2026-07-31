@@ -90,7 +90,7 @@ export const projects = [
     id: 3,
     title: "Movie Ticket Booking System",
     description: "Developed a web application that enables users to book movie tickets with real-time seat availability and scheduling features.",
-    technologies: ["PHP", "MySQL", "JavaScript"],
+    technologies: ["HTML5", "MySQL", "JavaScript"],
      github: "https://github.com/Kkssys/movie",
     demo: "https://movie-inky-phi.vercel.app",
     image: movie

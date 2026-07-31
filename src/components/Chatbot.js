@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { FaSync } from 'react-icons/fa';
 import { personalInfo, experiences, projects } from '../data/portfolioData';
 
 function Chatbot() {
@@ -7,23 +8,22 @@ function Chatbot() {
   const [messages, setMessages] = useState([
     { 
       id: 1, 
-      text: "👋 Hi! I'm GD's AI assistant. Ask me anything about him!", 
+      text: "👋 Hi! I'm GD's Asst. Ask me anything about Dinesh!", 
       sender: 'bot' 
     }
   ]);
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
 
-  // Show greeting 3.5 seconds after page load (after welcome screen)
+  // Show greeting after welcome screen
   useEffect(() => {
     const showTimer = setTimeout(() => {
       setShowGreeting(true);
-    }, 2500); // matches welcome screen duration (~3s + 0.5s fade)
+    }, 3500);
 
-    // Auto-hide greeting after another 5 seconds
     const hideTimer = setTimeout(() => {
       setShowGreeting(false);
-    }, 5500); // 2500 + 3000
+    }, 8500);
 
     return () => {
       clearTimeout(showTimer);
@@ -31,7 +31,6 @@ function Chatbot() {
     };
   }, []);
 
-  // If user opens chat, hide greeting immediately
   useEffect(() => {
     if (isOpen) {
       setShowGreeting(false);
@@ -41,6 +40,17 @@ function Chatbot() {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Reset chat function
+  const resetChat = () => {
+    setMessages([
+      { 
+        id: Date.now(), 
+        text: "👋 Hi! I'm GD's Asst. Ask me anything about Dinesh!", 
+        sender: 'bot' 
+      }
+    ]);
+  };
 
   // Helper: extract username from URL
   const getUsername = (url) => {
@@ -65,7 +75,7 @@ function Chatbot() {
       }
     }
 
-    // --- 2. GITHUB ID (username) ---
+    // --- 2. GITHUB ID ---
     if (lower.includes('github id') || lower.includes('github username')) {
       return `My GitHub username is **${githubUsername}**. You can find my code at ${personalInfo.github}`;
     }
@@ -73,7 +83,7 @@ function Chatbot() {
       return `My GitHub profile: ${personalInfo.github}`;
     }
 
-    // --- 3. LINKEDIN ID (username) ---
+    // --- 3. LINKEDIN ID ---
     if (lower.includes('linkedin id') || lower.includes('linkedin username')) {
       return `My LinkedIn ID is **${linkedinUsername}**. Connect with me at ${personalInfo.linkedin}`;
     }
@@ -81,12 +91,12 @@ function Chatbot() {
       return `My LinkedIn profile: ${personalInfo.linkedin}`;
     }
 
-    // --- 4. RESUME / CV ---
+    // --- 4. RESUME ---
     if (lower.includes('resume') || lower.includes('cv') || lower.includes('curriculum') || lower.includes('vitae')) {
-      return `📄 Here's my resume: <a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" style="color: #2563eb; font-weight: bold; text-decoration: underline;">📄 Download Resume</a>`;
+      return `<a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" class="chatbot-btn">📄 Download Resume</a>`;
     }
 
-   // --- 5. PROJECTS (specific) - WITH BUTTONS ---
+    // --- 5. PROJECTS (specific) - WITH BUTTONS ---
     for (const project of projects) {
       if (lower.includes(project.title.toLowerCase())) {
         let response = `<strong>📁 ${project.title}</strong><br><br>`;
@@ -103,12 +113,13 @@ function Chatbot() {
       }
     }
 
-    if (lower.includes('project') || lower.includes('projects') || lower.includes('built') || lower.includes('developed')) {
+    // --- 6. PROJECTS (list) ---
+    if (lower.includes('project') || lower.includes('projects') || lower.includes('built') || lower.includes('work')) {
       const projectList = projects.map(p => `• ${p.title}`).join('\n');
       return `Here are my projects:\n${projectList}\n\nWhich one would you like to know more about?`;
     }
 
-    // --- 6. EXPERIENCE (specific) ---
+    // --- 7. EXPERIENCE (specific) ---
     for (const exp of experiences) {
       if (lower.includes(exp.company.toLowerCase()) || 
           lower.includes(exp.position.toLowerCase())) {
@@ -116,39 +127,40 @@ function Chatbot() {
       }
     }
 
+    // --- 8. EXPERIENCE (list) ---
     if (lower.includes('experience') || lower.includes('intern') || lower.includes('internship') || lower.includes('work')) {
       const expList = experiences.map(e => `• ${e.position} at ${e.company} (${e.duration})`).join('\n');
       return `Here's my experience:\n${expList}\n\nWant to know more about any of these?`;
     }
 
-    // --- 7. SKILLS / TECH ---
+    // --- 9. SKILLS ---
     if (lower.includes('skill') || lower.includes('tech') || lower.includes('know') || lower.includes('technologies')) {
       const allTech = [...new Set(projects.flatMap(p => p.technologies))];
       return `I work with: ${allTech.join(', ')}`;
     }
 
-    // --- 8. EMAIL ---
+    // --- 10. EMAIL ---
     if (lower.includes('email') || lower.includes('mail') || lower.includes('contact')) {
       return `You can email me at ${personalInfo.email}`;
     }
 
-    // --- 9. LOCATION ---
+    // --- 11. LOCATION ---
     if (lower.includes('location') || lower.includes('where') || lower.includes('based')) {
       return `I'm based in ${personalInfo.location}`;
     }
 
-    // --- 10. INTRO / BIO ---
+    // --- 12. INTRO / BIO ---
     if (lower.includes('intro') || lower.includes('bio') || 
         lower.includes('about') || lower.includes('yourself') || lower.includes('who')) {
       return personalInfo.bio;
     }
 
-    // --- 11. NAME ---
+    // --- 13. NAME ---
     if (lower.includes('name') || lower.includes('called')) {
       return `My name is ${personalInfo.name}. I'm a ${personalInfo.title}.`;
     }
 
-    // --- 12. FALLBACK ---
+    // --- 14. FALLBACK ---
     return `I'm not sure about that. You can ask me about:\n• My projects\n• My experience\n• My skills\n• My contact info (email, LinkedIn, GitHub, phone)\n• My resume\n• My location`;
   };
 
@@ -168,7 +180,7 @@ function Chatbot() {
         id: Date.now() + 1, 
         text: botResponse, 
         sender: 'bot',
-        isHtml: botResponse.includes('<a')
+        isHtml: botResponse.includes('<a') || botResponse.includes('<strong>')
       };
       setMessages(prev => [...prev, botMessage]);
     }, 400);
@@ -187,7 +199,6 @@ function Chatbot() {
     "Can I see your resume?"
   ];
 
-  // Handle greeting click - open chat
   const handleGreetingClick = () => {
     setShowGreeting(false);
     setIsOpen(true);
@@ -195,7 +206,6 @@ function Chatbot() {
 
   return (
     <div className="chatbot-container">
-      {/* Greeting Popup - appears after welcome screen */}
       {showGreeting && (
         <div className="chatbot-greeting" onClick={handleGreetingClick}>
           <div className="greeting-content">
@@ -205,19 +215,22 @@ function Chatbot() {
         </div>
       )}
 
-      {/* Chat Button */}
       {!isOpen && (
         <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
-          <i class="bi bi-robot"></i>
+         <i class="bi bi-robot"></i>
         </button>
       )}
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <span>🤖 GD.ai</span>
-            <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
+            <span>🤖 GD's Asst</span>
+            <div className="chatbot-header-actions">
+              <button className="chatbot-refresh" onClick={resetChat} aria-label="Reset chat">
+               <i class="bi bi-arrow-clockwise"></i>
+              </button>
+              <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
+            </div>
           </div>
 
           <div className="chatbot-messages">

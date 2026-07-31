@@ -2071,3 +2071,29 @@ body.dark-mode .social-btn.linkedin:hover {
     height: 18px;
   }
 }
+
+
+
+.chatbot-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chatbot-refresh {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-refresh:hover {
+  transform: rotate(90deg);
+  opacity: 0.8;
+}
