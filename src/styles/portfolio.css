@@ -4085,7 +4085,7 @@ body.dark-mode .back-to-top:hover {
 
 .rocket-back-to-top.launching {
   transition: transform 0.8s ease-in-out, opacity 0.6s ease;
-  transform: translateY(-850px) scale(1.2) !important;
+  transform: translateY(-1200px) scale(1.2) !important;
   opacity: 0 !important;
   pointer-events: none;
 }
