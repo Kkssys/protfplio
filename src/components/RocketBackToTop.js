@@ -27,7 +27,7 @@ function RocketBackToTop() {
     setIsVisible(false); // hide immediately so it doesn't stay in middle
 
     const startY = window.scrollY;
-    const duration = 800; // total time in ms
+    const duration = 1000; // total time in ms
     const startTime = performance.now();
 
     const animateScroll = (currentTime) => {
