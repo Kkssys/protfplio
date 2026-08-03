@@ -26,6 +26,28 @@ export const ThemeProvider = ({ children }) => {
     }
   }, [isDarkMode]);
 
+  // ----- RIPPLE EFFECT LISTENER -----
+  useEffect(() => {
+    const handleRipple = (e) => {
+      const { x, y, isDark } = e.detail;
+      // Create ripple element
+      const ripple = document.createElement('div');
+      ripple.className = `theme-ripple ${isDark ? 'dark' : ''}`;
+      const size = 300; // diameter of ripple
+      ripple.style.left = `${x - size/2}px`;
+      ripple.style.top = `${y - size/2}px`;
+      ripple.style.width = `${size}px`;
+      ripple.style.height = `${size}px`;
+      document.body.appendChild(ripple);
+      
+      // Remove after animation completes
+      setTimeout(() => ripple.remove(), 1000);
+    };
+
+    window.addEventListener('themeToggle', handleRipple);
+    return () => window.removeEventListener('themeToggle', handleRipple);
+  }, []);
+
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };

@@ -6,6 +6,8 @@ function Hero({ personalInfo }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopIndex, setLoopIndex] = useState(0);
 
+ const isAvailable = true;
+
   const roles = ['Web Developer', 'Frontend Developer', 'Full Stack Developer'];
   const typingSpeed = 10;
   const deletingSpeed = 10;
@@ -87,7 +89,16 @@ function Hero({ personalInfo }) {
                 <span>LinkedIn</span>
               </a>
             </div>
+
+   <div className="hero-status">
+              <span className={`status-dot ${isAvailable ? 'available' : 'not-available'}`}></span>
+              <span className="status-text">
+                {isAvailable ? 'Available for work' : 'Not available'}
+              </span>
+            </div>
+
           </div>
+          
           <div className="hero-image">
             <div className="image-placeholder">
               <img 

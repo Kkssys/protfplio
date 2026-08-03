@@ -93,7 +93,7 @@ function Chatbot() {
 
     // --- 4. RESUME ---
     if (lower.includes('resume') || lower.includes('cv') || lower.includes('curriculum') || lower.includes('vitae')) {
-      return `<a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" class="chatbot-btn">📄 Download Resume</a>`;
+      return `<a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" className="chatbot-btn">📄 Download Resume</a>`;
     }
 
     // --- 5. PROJECTS (specific) - WITH BUTTONS ---
@@ -104,10 +104,10 @@ function Chatbot() {
         response += `<strong>🛠️ Technologies:</strong> ${project.technologies.join(', ')}<br><br>`;
         
         if (project.github) {
-          response += `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="chatbot-btn">💻 Code</a> `;
+          response += `<a href="${project.github}" target="_blank" rel="noopener noreferrer" className="chatbot-btn">💻 Code</a> `;
         }
         if (project.demo) {
-          response += `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="chatbot-btn">🚀 Demo</a>`;
+          response += `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" className="chatbot-btn">🚀 Demo</a>`;
         }
         return response;
       }
@@ -209,7 +209,7 @@ function Chatbot() {
       {showGreeting && (
         <div className="chatbot-greeting" onClick={handleGreetingClick}>
           <div className="greeting-content">
-            <span className="greeting-emoji"><i class="bi bi-chat-dots"></i></span>
+            <span className="greeting-emoji"><i className="bi bi-chat-dots"></i></span>
             <span className="greeting-text">Hi, I'm GD's Asst</span>
           </div>
         </div>
@@ -217,7 +217,7 @@ function Chatbot() {
 
       {!isOpen && (
         <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
-         <i class="bi bi-robot"></i>
+         <i className="bi bi-robot"></i>
         </button>
       )}
 
@@ -227,7 +227,7 @@ function Chatbot() {
             <span>🤖 GD's Asst</span>
             <div className="chatbot-header-actions">
               <button className="chatbot-refresh" onClick={resetChat} aria-label="Reset chat">
-               <i class="bi bi-arrow-clockwise"></i>
+               <i className="bi bi-arrow-clockwise"></i>
               </button>
               <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
             </div>

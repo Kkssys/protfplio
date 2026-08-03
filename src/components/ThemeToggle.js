@@ -1,47 +1,64 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 
 function ThemeToggle() {
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const bulbRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const handleToggle = () => {
+    const rect = bulbRef.current?.getBoundingClientRect();
+    const x = rect?.left + rect?.width / 2;
+    const y = rect?.top + rect?.height / 2;
+
+    window.dispatchEvent(
+      new CustomEvent('themeToggle', {
+        detail: { x, y, isDark: isDarkMode }
+      })
+    );
+
+    setTimeout(() => toggleDarkMode(), 50);
+  };
+
+  // Swing on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const scrollY = window.scrollY;
+      const angle = Math.sin(scrollY / 30) * 8;
+      containerRef.current.style.transform = `rotate(${angle}deg)`;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <button 
-      className="theme-toggle" 
-      onClick={toggleDarkMode}
-      aria-label="Toggle dark mode"
-    >
-      {isDarkMode ? (
-        // Sun icon for dark mode (to switch to light)
-        <svg 
-          className="theme-icon" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2"
+    <div className="bulb-wrapper">
+      <div className="bulb-container" ref={containerRef}>
+        {/* Longer hanging string */}
+        <div className="bulb-string"></div>
+        {/* Small base ring connecting string to bulb */}
+        <div className="bulb-base"></div>
+        {/* Bulb button – rotated 180° to hang upside down */}
+        <button
+          ref={bulbRef}
+          className={`bulb-toggle ${isDarkMode ? 'dark' : 'light'}`}
+          onClick={handleToggle}
+          aria-label="Toggle dark mode"
         >
-          <circle cx="12" cy="12" r="5" />
-          <line x1="12" y1="1" x2="12" y2="3" />
-          <line x1="12" y1="21" x2="12" y2="23" />
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-          <line x1="1" y1="12" x2="3" y2="12" />
-          <line x1="21" y1="12" x2="23" y2="12" />
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-        </svg>
-      ) : (
-        // Moon icon for light mode (to switch to dark)
-        <svg 
-          className="theme-icon" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2"
-        >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-      )}
-    </button>
+          <div className="bulb-icon-wrapper" style={{ transform: 'rotate(180deg)' }}>
+            <svg className="bulb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7z" />
+              <path d="M9 21h6" />
+              <path d="M10 18v2" />
+              <path d="M14 18v2" />
+            </svg>
+          </div>
+          <span className="bulb-glow"></span>
+        </button>
+      </div>
+    </div>
   );
 }
 

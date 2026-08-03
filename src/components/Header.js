@@ -18,21 +18,13 @@ function Header({ personalInfo }) {
 
   return (
     <header className="header">
+      {/* Main header container */}
       <div className="header-container">
         <div className="logo">
-             <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
-              GD   {/* ← Hardcoded to "GD" */}
-             </a>
+          <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }}>
+            GD
+          </a>
         </div>
-{/*         
-        <div className="header-controls">
-          <ThemeToggle />
-          <button className="mobile-menu-btn" onClick={toggleMenu}>
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </button>
-        </div> */}
 
         <nav className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
           <ul>
@@ -43,28 +35,28 @@ function Header({ personalInfo }) {
             <li><a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact'); }}>Contact</a></li>
           </ul>
         </nav>
-          
-           <div className="header-controls">
 
-        
-        <a 
+        <div className="header-controls">
+          <a 
             href="/Dinesh_Resume.pdf" 
             download="Dinesh_Resume.pdf"
             className="btn-resume"
             aria-label="Download Resume"
-            
           >
-             <i className="bi bi-file-earmark-arrow-down"></i>
-             Resume
+            <i className="bi bi-file-earmark-arrow-down"></i>
+            Resume
           </a>
-
-          <ThemeToggle />
           <button className="mobile-menu-btn" onClick={toggleMenu}>
             <span className="bar"></span>
             <span className="bar"></span>
             <span className="bar"></span>
           </button>
         </div>
+      </div>
+
+      {/* 👇 HANGING BULB – placed outside the container, inside header */}
+      <div className="header-bulb-wrapper">
+        <ThemeToggle />
       </div>
     </header>
   );
