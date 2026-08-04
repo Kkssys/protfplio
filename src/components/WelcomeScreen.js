@@ -43,10 +43,13 @@ function WelcomeScreen({ onComplete }) {
       <div className="welcome-content">
         <h1 className="welcome-title">{titleText}</h1>
         {/* Optional: Static subtitle (uncomment if you want it) */}
-         <p className="welcome-subtitle">For better experience use Desktop view</p> 
-        <button className="welcome-skip" onClick={handleSkip}>
+         <button className="welcome-skip" onClick={handleSkip}>
           Skip →
         </button>
+         <p className="welcome-subtitle">For better experience use Desktop view</p> 
+        {/* <button className="welcome-skip" onClick={handleSkip}>
+          Skip →
+        </button> */}
       </div>
     </div>
   );
