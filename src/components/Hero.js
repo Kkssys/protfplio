@@ -64,7 +64,7 @@ function Hero({ personalInfo }) {
               >
                 Hire Me
               </a>
-              <a href="#projects" className="btn btn-secondary">View Projects</a>
+              <a href="#skills-certificates" className="btn btn-secondary">View My Works</a>
             </div>
             {/* Social Buttons - Only GitHub & LinkedIn */}
             <div className="social-buttons">
