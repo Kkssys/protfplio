@@ -70,7 +70,7 @@ export const experiences = [
 export const projects = [
   {
     id: 1,
-    title: "Digital Food Donation & Redistribution Platform",
+    title: "Food Donation & Redistribution",
     description: "Built a real-time web platform to reduce food waste by connecting donors, volunteers, and recipients using location-based matching, OTP verification, and live tracking .",
     technologies: ["React", "Node.js", "MongoDB", "Express.js"],
      github:"https://github.com/Kkssys/food-donation",

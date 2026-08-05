@@ -18,9 +18,11 @@ import {
 
 // ===== IMPORT CERTIFICATE IMAGES =====
 import frontend from '../assets/certificates/frontend.jpeg';
- import fullstack from '../assets/certificates/fullstack.jpeg';
-// import unnatiCert from '../assets/certificates/unnati-soft-skills.jpg';
+import fullstack from '../assets/certificates/fullstack.jpeg';
 import networks from '../assets/certificates/networks.png';
+
+// ===== IMPORT PROJECTS DATA =====
+import { projects } from '../data/portfolioData';
 
 function SkillsCertificates() {
   const [activeTab, setActiveTab] = useState('skills');
@@ -57,7 +59,7 @@ function SkillsCertificates() {
       issuer: "SkillUp by Unnati",
       date: "Dec. 13, 2024",
       image: fullstack,
-    },  
+    },
     {
       id: 3,
       title: "Introduction to Networks",
@@ -82,10 +84,10 @@ function SkillsCertificates() {
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
-    setAnimationKey(prev => prev + 1); // re-trigger animation for both tabs
+    setAnimationKey(prev => prev + 1);
   };
 
-  // Directions for cards (both skills and certificates)
+  // Directions for cards (skills, certificates, projects)
   const directions = [
     { dx: -80, dy: 0 },    // left
     { dx: 80, dy: 0 },     // right
@@ -97,14 +99,25 @@ function SkillsCertificates() {
     { dx: 80, dy: -80 },   // top-right
   ];
 
+  // ===== SLIDER CALCULATIONS =====
+  const tabs = ['skills', 'certificates', 'projects'];
+  const activeIndex = tabs.indexOf(activeTab);
+  const sliderWidth = 100 / 3; // 33.33%
+  const sliderTranslate = activeIndex * 100; // 0%, 100%, 200%
+
   return (
     <section id="skills-certificates" className="skills-certificates-section">
       <div className="container">
-        {/* Tab Headers – Toggle Slider */}
-        <div className="tab-headers">
+        {/* ===== TAB HEADERS – THREE TABS WITH SLIDER ===== */}
+        <div className="tab-headers three-tabs">
           <div className="tab-slider-wrapper">
-            <div 
-              className={`tab-slider ${activeTab === 'skills' ? 'skills-active' : 'certs-active'}`}
+            {/* Sliding background */}
+            <div
+              className="tab-slider"
+              style={{
+                width: `calc(${sliderWidth}% - 8px)`,
+                transform: `translateX(${sliderTranslate}%)`,
+              }}
             />
             <button
               className={`tab-btn ${activeTab === 'skills' ? 'active' : ''}`}
@@ -118,10 +131,16 @@ function SkillsCertificates() {
             >
               Certificates
             </button>
+            <button
+              className={`tab-btn ${activeTab === 'projects' ? 'active' : ''}`}
+              onClick={() => handleTabChange('projects')}
+            >
+              Projects
+            </button>
           </div>
         </div>
 
-        {/* ===== SKILLS TAB – with animated cards ===== */}
+        {/* ===== SKILLS TAB ===== */}
         {activeTab === 'skills' && (
           <div className="tab-content skills-tab" key={animationKey}>
             <div className="skills-grid-stacked">
@@ -145,7 +164,7 @@ function SkillsCertificates() {
           </div>
         )}
 
-        {/* ===== CERTIFICATES TAB – SAME ANIMATION AS SKILLS ===== */}
+        {/* ===== CERTIFICATES TAB ===== */}
         {activeTab === 'certificates' && (
           <div className="tab-content certificates-tab" key={animationKey}>
             <div className="certificates-grid">
@@ -157,7 +176,7 @@ function SkillsCertificates() {
                     className="certificate-card animate-in"
                     style={{
                       '--start-transform': `translate(${dir.dx}px, ${dir.dy}px) scale(0.8)`,
-                      animationDelay: `${index * 80}ms`, // slightly slower for certificates
+                      animationDelay: `${index * 80}ms`,
                     }}
                     onClick={() => openCertificate(cert)}
                   >
@@ -175,6 +194,56 @@ function SkillsCertificates() {
                     <div className="certificate-card-info">
                       <h3 className="certificate-card-title">{cert.title}</h3>
                       <p className="certificate-card-issuer">{cert.issuer}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ===== PROJECTS TAB – NEW! ===== */}
+        {activeTab === 'projects' && (
+          <div className="tab-content projects-tab" key={animationKey}>
+            <div className="projects-grid">
+              {projects.map((project, index) => {
+                const dir = directions[index % directions.length];
+                return (
+                  <div
+                    key={project.id}
+                    className="project-card animate-in"
+                    style={{
+                      '--start-transform': `translate(${dir.dx}px, ${dir.dy}px) scale(0.8)`,
+                      animationDelay: `${index * 60}ms`,
+                    }}
+                  >
+                    <div className="project-card-image-wrapper">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="project-card-image"
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = 'https://via.placeholder.com/400x250/2563eb/ffffff?text=Project';
+                        }}
+                      />
+                    </div>
+                    <div className="project-card-info">
+                      <h3 className="project-card-title">{project.title}</h3>
+                      {/* <p className="project-card-description">{project.description}</p>
+                      <div className="project-card-tech">
+                        {project.technologies.map((tech, i) => (
+                          <span key={i} className="project-tech-tag">{tech}</span>
+                        ))}
+                      </div> */}
+                      <div className="project-card-links">
+                        {project.github && (
+                          <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link-btn">Code</a>
+                        )}
+                        {project.demo && (
+                          <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-link-btn demo">Demo</a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 );
@@ -200,7 +269,6 @@ function SkillsCertificates() {
               <div className="certificate-modal-info">
                 <h3 className="certificate-modal-title">{selectedCert.title}</h3>
                 <p className="certificate-modal-issuer">{selectedCert.issuer}</p>
-              
               </div>
             </div>
           </div>

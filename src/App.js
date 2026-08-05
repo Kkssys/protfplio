@@ -6,7 +6,7 @@ import About from './components/About';
 // import Skills from './components/Skills';
 import SkillsCertificates from './components/SkillsCertificates'; 
 import Experience from './components/Experience';
-import Projects from './components/Projects';
+// import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
@@ -34,7 +34,7 @@ function App() {
           <About /> 
            <SkillsCertificates /> 
           <Experience experiences={experiences} />
-          <Projects projects={projects} />
+          {/* <Projects projects={projects} /> */}
           <Contact personalInfo={personalInfo} />
         </main>
         <Footer personalInfo={personalInfo} />
