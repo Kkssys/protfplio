@@ -20,6 +20,7 @@ import {
 import frontend from '../assets/certificates/frontend.jpeg';
 import fullstack from '../assets/certificates/fullstack.jpeg';
 import networks from '../assets/certificates/networks.png';
+import mongodb from '../assets/certificates/mongodb.jpeg';
 
 // ===== IMPORT PROJECTS DATA =====
 import { projects } from '../data/portfolioData';
@@ -57,15 +58,22 @@ function SkillsCertificates() {
       id: 2,
       title: "Full Stack Web Development",
       issuer: "SkillUp by Unnati",
-      date: "Dec. 13, 2024",
+      // date: "Dec. 13, 2024",
       image: fullstack,
     },
     {
       id: 3,
       title: "Introduction to Networks",
       issuer: "Cisco Networking Academy",
-      date: "2024",
+      // date: "2024",
       image: networks,
+    },
+    {
+      id: 4,
+      title: "CRUD Operations in MongoDB",
+      issuer: "MongoDB",
+      // date: "2024",
+      image: mongodb,
     }
   ];
 
