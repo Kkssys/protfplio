@@ -18,9 +18,15 @@ import {
 
 // ===== IMPORT CERTIFICATE IMAGES =====
 import frontend from '../assets/certificates/frontend.jpeg';
+import frontend1 from '../assets/certificates/frontend1.jpeg';
 import fullstack from '../assets/certificates/fullstack.jpeg';
 import networks from '../assets/certificates/networks.png';
 import mongodb from '../assets/certificates/mongodb.jpeg';
+import hci from '../assets/certificates/hci.jpeg';
+import iot from '../assets/certificates/iot.jpeg';
+import redhat from '../assets/certificates/redhat.jpeg';
+
+
 
 // ===== IMPORT PROJECTS DATA =====
 import { projects } from '../data/portfolioData';
@@ -51,30 +57,58 @@ function SkillsCertificates() {
       id: 1,
       title: "Frontend Development with React",
       issuer: "SkillUp by Unnati",
-      date: "March 23, 2025",
+      // date: "March 23, 2025",
       image: frontend,
     },
-    {
+     {
       id: 2,
+      title: "Frontend Developer (React)",
+      issuer: "HackerRank",
+      // date: "March 23, 2025",
+      image: frontend1,
+    },
+    {
+      id: 3,
       title: "Full Stack Web Development",
       issuer: "SkillUp by Unnati",
       // date: "Dec. 13, 2024",
       image: fullstack,
     },
     {
-      id: 3,
+      id: 4,
       title: "Introduction to Networks",
       issuer: "Cisco Networking Academy",
       // date: "2024",
       image: networks,
     },
     {
-      id: 4,
+      id: 5,
       title: "CRUD Operations in MongoDB",
       issuer: "MongoDB",
       // date: "2024",
       image: mongodb,
-    }
+    },
+    {
+      id: 6,
+      title: "Human Computer Interaction",
+      issuer: "NPTEL",
+      // date: "2024",
+      image: hci,
+    },
+    {
+      id: 7,
+      title: "Introduction to Industry 4.0 and Industrial Internet of Things (IIoT)",
+      issuer: "MongoDB",
+      // date: "2024",
+      image: iot,
+    },
+    {
+      id: 8,
+      title: "Red Hat Certified System Administrator (RHCSA)",
+      issuer: "Red Hat",
+      // date: "2024",
+      image: redhat,
+    },
   ];
 
   const openCertificate = (cert) => {
