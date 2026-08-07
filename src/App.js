@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import Chatbot from './components/Chatbot';
 import RocketBackToTop from './components/RocketBackToTop';
 import WelcomeScreen from './components/WelcomeScreen';  // ← Import
+import CustomCursor from './components/CustomCursor';  // ← Import
 import { personalInfo, experiences, projects } from './data/portfolioData';
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
         <Footer personalInfo={personalInfo} />
         <Chatbot />
           <RocketBackToTop /> 
+        <CustomCursor />  {/* ← Add CustomCursor */}
       </div>
     </ThemeProvider>
   );

@@ -4394,3 +4394,77 @@ body.dark-mode .tab-btn:hover:not(.active) {
     padding: 0.4rem 0.2rem;
   }
 }
+
+
+
+.custom-cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  border: 2px solid var(--primary-color);
+  background: rgba(37, 99, 235, 0.05);
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.06), inset 0 0 40px rgba(37, 99, 235, 0.03);
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.5);
+}
+
+/* Crosshair lines on dot */
+.custom-cursor-dot::before,
+.custom-cursor-dot::after {
+  content: '';
+  position: absolute;
+  background: var(--primary-color);
+  opacity: 0.4;
+}
+.custom-cursor-dot::before {
+  left: -8px;
+  top: 50%;
+  width: 6px;
+  height: 1px;
+  transform: translateY(-50%);
+}
+.custom-cursor-dot::after {
+  right: -8px;
+  top: 50%;
+  width: 6px;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+/* Hide default cursor on interactive elements */
+a, button, .btn, .social-btn, .tab-btn, .project-link-btn,
+.certificate-card, .project-card, .skill-card-stacked,
+.category-skill-tag, .skill-tag, .back-to-top,
+.rocket-back-to-top, .theme-toggle, .mobile-menu-btn,
+.nav-menu a, .chatbot-toggle, .quick-reply-btn,
+input, textarea, select, .filter-btn,
+.hero-buttons a, .social-buttons a,
+.hero-status, .status-card {
+  cursor: none !important;
+}
+
+@media (max-width: 768px) {
+  .custom-cursor-ring,
+  .custom-cursor-dot {
+    display: none !important;
+  }
+  a, button, .btn, .social-btn, .tab-btn, .project-link-btn,
+  .certificate-card, .project-card, .skill-card-stacked,
+  .category-skill-tag, .skill-tag, .back-to-top,
+  .rocket-back-to-top, .theme-toggle, .mobile-menu-btn,
+  .nav-menu a, .chatbot-toggle, .quick-reply-btn,
+  input, textarea, select, .filter-btn,
+  .hero-buttons a, .social-buttons a,
+  .hero-status, .status-card {
+    cursor: pointer !important;
+  }
+}
