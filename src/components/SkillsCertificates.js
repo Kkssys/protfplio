@@ -25,6 +25,7 @@ import mongodb from '../assets/certificates/mongodb.jpeg';
 import hci from '../assets/certificates/hci.jpeg';
 import iot from '../assets/certificates/iot.jpeg';
 import redhat from '../assets/certificates/redhat.jpeg';
+import ibmwd from '../assets/certificates/ibmwd.jpg';
 
 
 
@@ -53,62 +54,70 @@ function SkillsCertificates() {
 
   // ===== CERTIFICATES DATA =====
   const certificates = [
+     {
+      id: 9,
+      title: "Web  Development Fundamentals",
+      issuer: "IBM",
+      // date: "2024",
+      image: ibmwd,
+    },
     {
-      id: 1,
+      id: 2,
       title: "Frontend Development with React",
       issuer: "SkillUp by Unnati",
       // date: "March 23, 2025",
       image: frontend,
     },
      {
-      id: 2,
+      id: 3,
       title: "Frontend Developer (React)",
       issuer: "HackerRank",
       // date: "March 23, 2025",
       image: frontend1,
     },
     {
-      id: 3,
+      id: 4,
       title: "Full Stack Web Development",
       issuer: "SkillUp by Unnati",
       // date: "Dec. 13, 2024",
       image: fullstack,
     },
     {
-      id: 4,
+      id: 5,
       title: "Introduction to Networks",
       issuer: "Cisco Networking Academy",
       // date: "2024",
       image: networks,
     },
     {
-      id: 5,
+      id: 6,
       title: "CRUD Operations in MongoDB",
       issuer: "MongoDB",
       // date: "2024",
       image: mongodb,
     },
     {
-      id: 6,
+      id: 7,
       title: "Human Computer Interaction",
       issuer: "NPTEL",
       // date: "2024",
       image: hci,
     },
     {
-      id: 7,
+      id: 8,
       title: "Introduction to Industry 4.0 and Industrial Internet of Things (IIoT)",
       issuer: "MongoDB",
       // date: "2024",
       image: iot,
     },
     {
-      id: 8,
+      id: 9,
       title: "Red Hat Certified System Administrator (RHCSA)",
       issuer: "Red Hat",
       // date: "2024",
       image: redhat,
     },
+   
   ];
 
   const openCertificate = (cert) => {
