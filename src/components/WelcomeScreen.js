@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import WaterWaveText from './WaveLoadingText';
 
 function WelcomeScreen({ onComplete }) {
   const [isVisible, setIsVisible] = useState(true);
@@ -28,7 +29,7 @@ function WelcomeScreen({ onComplete }) {
     const timer = setTimeout(() => {
       setIsVisible(false);
       setTimeout(onComplete, 500);
-    }, 2000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [onComplete]);
@@ -38,18 +39,17 @@ function WelcomeScreen({ onComplete }) {
     setTimeout(onComplete, 500);
   };
 
-  return (
+   return (
     <div className={`welcome-screen ${isVisible ? 'visible' : 'hidden'}`}>
       <div className="welcome-content">
-        <h1 className="welcome-title">{titleText}</h1>
-        {/* Optional: Static subtitle (uncomment if you want it) */}
-         <button className="welcome-skip" onClick={handleSkip}>
+        <div className="water-wave-wrapper">
+          <WaterWaveText />
+        </div> 
+        <p className="welcome-subtitle">Welcome to My Portfolio</p>
+       
+        <button className="welcome-skip" onClick={handleSkip}>
           Skip →
         </button>
-         <p className="welcome-subtitle">For better experience use Desktop view</p> 
-        {/* <button className="welcome-skip" onClick={handleSkip}>
-          Skip →
-        </button> */}
       </div>
     </div>
   );
