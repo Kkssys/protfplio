@@ -11,6 +11,7 @@ function Chatbot() {
   const [hasVideoPlayed, setHasVideoPlayed] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const videoRef = useRef(null);
+  const inputRef = useRef(null);
   const [messages, setMessages] = useState([
     { 
       id: 1, 
@@ -28,11 +29,9 @@ function Chatbot() {
       const isVisible = !!welcomeElement;
       setIsWelcomeVisible(isVisible);
 
-      // When welcome screen ends (becomes hidden)
       if (!isVisible && !hasVideoPlayed) {
         setShowVideo(true);
         setHasVideoPlayed(true);
-        // Show greeting shortly after video starts
         setTimeout(() => {
           setShowGreeting(true);
         }, 100);
@@ -64,10 +63,12 @@ function Chatbot() {
 
   // Auto-scroll messages
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, [messages]);
 
-  // Auto-play video when it becomes visible
+  // Auto-play video
   useEffect(() => {
     if (showVideo && videoRef.current) {
       videoRef.current.play().catch(err => {
@@ -76,6 +77,15 @@ function Chatbot() {
     }
   }, [showVideo]);
 
+  // Focus input when chat opens
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      setTimeout(() => {
+        inputRef.current.focus();
+      }, 300);
+    }
+  }, [isOpen]);
+
   // Preload image
   useEffect(() => {
     const img = new Image();
@@ -83,27 +93,58 @@ function Chatbot() {
     img.onload = () => setImageLoaded(true);
   }, []);
 
-  // Video ended handler - HIDE GREETING AND VIDEO TOGETHER
+  // Video ended handler
   const handleVideoEnd = () => {
     setVideoEnded(true);
-    setShowGreeting(false); // Greeting disappears immediately
-    // Fade out video after 300ms
+    setShowGreeting(false);
     setTimeout(() => {
       setShowVideo(false);
     }, 300);
   };
 
-  // Skip video on click
+  // Skip video
   const handleSkipVideo = () => {
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
     setVideoEnded(true);
-    setShowGreeting(false); // Greeting disappears immediately
+    setShowGreeting(false);
     setTimeout(() => {
       setShowVideo(false);
     }, 300);
+  };
+
+  // ===== OPEN/CLOSE CHAT =====
+  const openChat = () => {
+    setIsOpen(true);
+    setShowGreeting(false);
+    setShowVideo(false);
+  };
+
+  const closeChat = (e) => {
+    e?.stopPropagation();
+    setIsOpen(false);
+  };
+
+  // ===== INPUT HANDLERS =====
+  const handleInputChange = (e) => {
+    setInput(e.target.value);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(e);
+    }
+  };
+
+  // ===== QUICK REPLY HANDLER =====
+  const handleQuickReply = (reply) => {
+    setInput(reply);
+    setTimeout(() => {
+      sendMessage({ preventDefault: () => {} });
+    }, 100);
   };
 
   // Helper: extract username from URL
@@ -204,15 +245,19 @@ function Chatbot() {
     return `I'm not sure about that. You can ask me about:\n• My projects\n• My experience\n• My skills\n• My contact info (email, LinkedIn, GitHub, phone)\n• My resume\n• My location`;
   };
 
+  // ===== SEND MESSAGE =====
   const sendMessage = (e) => {
-    e.preventDefault();
-    if (!input.trim()) return;
+    e?.preventDefault();
+    const message = input.trim();
+    if (!message) return;
 
-    const userMessage = { id: Date.now(), text: input, sender: 'user' };
+    // Add user message
+    const userMessage = { id: Date.now(), text: message, sender: 'user' };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
-    const botResponse = getBotResponse(input);
+    // Get bot response
+    const botResponse = getBotResponse(message);
 
     setTimeout(() => {
       const botMessage = { 
@@ -225,22 +270,20 @@ function Chatbot() {
     }, 400);
   };
 
+  // ===== QUICK REPLIES =====
   const quickReplies = [
     "Who are you?",
     "What projects have you built?",
     "Tell me about your experience",
     "What are your skills?",
     "How can I contact you?",
-    "What's your GitHub ID?",
-    "What's your LinkedIn ID?",
-    "What's your phone number?",
     "Can I see your resume?"
   ];
 
   const handleGreetingClick = () => {
     setShowGreeting(false);
     setShowVideo(false);
-    setIsOpen(true);
+    openChat();
   };
 
   if (isWelcomeVisible) {
@@ -249,7 +292,7 @@ function Chatbot() {
 
   return (
     <div className="chatbot-container">
-      {/* Greeting Popup - disappears when video ends */}
+      {/* Greeting Popup */}
       {showGreeting && (
         <div className="chatbot-greeting" onClick={handleGreetingClick}>
           <div className="greeting-content">
@@ -259,29 +302,14 @@ function Chatbot() {
         </div>
       )}
 
+      {/* Chat Button */}
       {!isOpen && (
         <button 
           className="chatbot-toggle" 
-          onClick={() => setIsOpen(true)}
+          onClick={openChat}
           aria-label="Open chat"
         >
-          {/* Video layer */}
-          <div 
-            className={`chatbot-video-wrapper ${videoEnded ? 'fade-out' : ''}`}
-            style={{ 
-              opacity: showVideo ? 1 : 0,
-              pointerEvents: showVideo ? 'auto' : 'none',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              transition: 'opacity 0.3s ease',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              zIndex: 2,
-            }}
-          >
+          {showVideo && !videoEnded ? (
             <video
               ref={videoRef}
               src="/videos/chatbot-intro.mp4"
@@ -297,22 +325,7 @@ function Chatbot() {
                 objectFit: 'cover',
               }}
             />
-          </div>
-
-          {/* Static Image layer (always present, hidden behind video) */}
-          <div 
-            className="chatbot-image-wrapper"
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              zIndex: 1,
-            }}
-          >
+          ) : (
             <img 
               src="/images/chatbot-icon.jpeg" 
               alt="Chatbot"
@@ -321,36 +334,29 @@ function Chatbot() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                opacity: imageLoaded ? 1 : 0,
-                transition: 'opacity 0.3s ease',
               }}
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.parentElement.innerHTML = '💬';
               }}
             />
-          </div>
-
-          <span 
-            className="chatbot-fallback"
-            style={{
-              position: 'absolute',
-              zIndex: 0,
-              fontSize: '2rem',
-              opacity: 0.5,
-              display: 'none',
-            }}
-          >
-            💬
-          </span>
+          )}
         </button>
       )}
 
+      {/* Chat Window */}
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
             <span>🤖 GD's Asst</span>
-            <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
+            <button 
+              className="chatbot-close" 
+              onClick={closeChat}
+              aria-label="Close chat"
+              type="button"
+            >
+              ✕
+            </button>
           </div>
 
           <div className="chatbot-messages">
@@ -375,23 +381,32 @@ function Chatbot() {
               <button
                 key={index}
                 className="quick-reply-btn"
-                onClick={() => {
-                  setInput(reply);
-                  setTimeout(() => sendMessage({ preventDefault: () => {} }), 100);
-                }}
+                onClick={() => handleQuickReply(reply)}
+                type="button"
               >
                 {reply}
               </button>
             ))}
           </div>
 
-          <form className="chatbot-input" onSubmit={sendMessage}>
+          <form 
+            className="chatbot-input" 
+            onSubmit={sendMessage}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage(e);
+              }
+            }}
+          >
             <input
+              ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={handleInputChange}
               placeholder="Ask me something..."
               maxLength={200}
+              autoFocus={isOpen}
             />
             <button type="submit">Send</button>
           </form>
