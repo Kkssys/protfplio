@@ -4900,7 +4900,7 @@ body.dark-mode .idcard-clip-pin {
 
 
 /* ============================================
-   CHATBOT VIDEO/IMAGE TRANSITION
+   SMOOTH VIDEO TO IMAGE TRANSITION
    ============================================ */
 
 .chatbot-toggle {
@@ -4919,11 +4919,24 @@ body.dark-mode .idcard-clip-pin {
   justify-content: center;
   padding: 0;
   position: relative;
+  flex-shrink: 0;
 }
 
 .chatbot-toggle:hover {
   transform: scale(1.08);
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+}
+
+/* Video wrapper - fades out smoothly */
+.chatbot-video-wrapper {
+  border-radius: 50%;
+  overflow: hidden;
+  transition: opacity 0.4s ease-in-out !important;
+}
+
+.chatbot-video-wrapper.fade-out {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .chatbot-video {
@@ -4933,6 +4946,12 @@ body.dark-mode .idcard-clip-pin {
   display: block;
 }
 
+/* Image wrapper - always present */
+.chatbot-image-wrapper {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
 .chatbot-image {
   width: 100%;
   height: 100%;
@@ -4940,23 +4959,11 @@ body.dark-mode .idcard-clip-pin {
   display: block;
 }
 
-/* Fade out animation for video */
-.chatbot-video-wrapper.fade-out {
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Remove blink by having both layers */
-.chatbot-video-wrapper,
-.chatbot-image-wrapper {
-  border-radius: 50%;
-  overflow: hidden;
-}
-
+/* Mobile */
 @media (max-width: 768px) {
   .chatbot-toggle {
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
   }
 }
 
@@ -4966,7 +4973,6 @@ body.dark-mode .idcard-clip-pin {
     height: 50px;
   }
 }
-
 
 /* ============================================
    CHATBOT & BACK-TO-TOP - MOBILE FIX

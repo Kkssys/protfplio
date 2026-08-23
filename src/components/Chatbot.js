@@ -10,6 +10,7 @@ function Chatbot() {
   const [isWelcomeVisible, setIsWelcomeVisible] = useState(true);
   const [hasVideoPlayed, setHasVideoPlayed] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const videoRef = useRef(null);
   const inputRef = useRef(null);
   const [messages, setMessages] = useState([
@@ -93,16 +94,23 @@ function Chatbot() {
     img.onload = () => setImageLoaded(true);
   }, []);
 
-  // Video ended handler
+  // Video ended handler - smooth transition
   const handleVideoEnd = () => {
     setVideoEnded(true);
     setShowGreeting(false);
+    setIsTransitioning(true);
+    
+    // Start fade out of video
     setTimeout(() => {
       setShowVideo(false);
-    }, 300);
+      // After video is hidden, end transition
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
+    }, 300); // Match CSS transition duration
   };
 
-  // Skip video
+  // Skip video on click
   const handleSkipVideo = () => {
     if (videoRef.current) {
       videoRef.current.pause();
@@ -110,8 +118,12 @@ function Chatbot() {
     }
     setVideoEnded(true);
     setShowGreeting(false);
+    setIsTransitioning(true);
     setTimeout(() => {
       setShowVideo(false);
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
     }, 300);
   };
 
@@ -130,13 +142,6 @@ function Chatbot() {
   // ===== INPUT HANDLERS =====
   const handleInputChange = (e) => {
     setInput(e.target.value);
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      sendMessage(e);
-    }
   };
 
   // ===== QUICK REPLY HANDLER =====
@@ -251,12 +256,10 @@ function Chatbot() {
     const message = input.trim();
     if (!message) return;
 
-    // Add user message
     const userMessage = { id: Date.now(), text: message, sender: 'user' };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
 
-    // Get bot response
     const botResponse = getBotResponse(message);
 
     setTimeout(() => {
@@ -277,6 +280,9 @@ function Chatbot() {
     "Tell me about your experience",
     "What are your skills?",
     "How can I contact you?",
+    "What's your GitHub ID?",
+    "What's your LinkedIn ID?",
+    "What's your phone number?",
     "Can I see your resume?"
   ];
 
@@ -309,7 +315,23 @@ function Chatbot() {
           onClick={openChat}
           aria-label="Open chat"
         >
-          {showVideo && !videoEnded ? (
+          {/* Video Layer */}
+          <div 
+            className={`chatbot-video-wrapper ${videoEnded ? 'fade-out' : ''}`}
+            style={{ 
+              opacity: showVideo ? 1 : 0,
+              pointerEvents: showVideo ? 'auto' : 'none',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              transition: 'opacity 0.4s ease-in-out',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              zIndex: 2,
+            }}
+          >
             <video
               ref={videoRef}
               src="/videos/chatbot-intro.mp4"
@@ -323,9 +345,25 @@ function Chatbot() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                display: 'block',
               }}
             />
-          ) : (
+          </div>
+
+          {/* Image Layer - Always present below video */}
+          <div 
+            className="chatbot-image-wrapper"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+          >
             <img 
               src="/images/chatbot-icon.jpeg" 
               alt="Chatbot"
@@ -334,13 +372,16 @@ function Chatbot() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
+                display: 'block',
+                opacity: imageLoaded ? 1 : 0,
+                transition: 'opacity 0.3s ease',
               }}
               onError={(e) => {
                 e.target.style.display = 'none';
                 e.target.parentElement.innerHTML = '💬';
               }}
             />
-          )}
+          </div>
         </button>
       )}
 
@@ -392,12 +433,6 @@ function Chatbot() {
           <form 
             className="chatbot-input" 
             onSubmit={sendMessage}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendMessage(e);
-              }
-            }}
           >
             <input
               ref={inputRef}
