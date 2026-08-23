@@ -4966,3 +4966,544 @@ body.dark-mode .idcard-clip-pin {
     height: 50px;
   }
 }
+
+
+/* ============================================
+   CHATBOT & BACK-TO-TOP - MOBILE FIX
+   ============================================ */
+
+/* Chatbot Container */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.chatbot-toggle,
+.chatbot-greeting {
+  pointer-events: auto;
+}
+
+/* Chatbot Toggle Button */
+.chatbot-toggle {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+}
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: var(--secondary-color);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  /* Chatbot */
+  .chatbot-container {
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .chatbot-toggle {
+    width: 55px;
+    height: 55px;
+  }
+
+  .chatbot-toggle .chatbot-video,
+  .chatbot-toggle .chatbot-image {
+    width: 55px;
+    height: 55px;
+  }
+
+  /* Back to Top */
+  .back-to-top {
+    bottom: 85px;
+    right: 15px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+
+  /* Greeting Popup */
+  .chatbot-greeting {
+    bottom: 70px !important;
+    right: 0 !important;
+    padding: 0.6rem 1rem !important;
+    max-width: 170px !important;
+  }
+
+  .chatbot-greeting .greeting-text {
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Chatbot */
+  .chatbot-container {
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .chatbot-toggle {
+    width: 50px;
+    height: 50px;
+  }
+
+  .chatbot-toggle .chatbot-video,
+  .chatbot-toggle .chatbot-image {
+    width: 50px;
+    height: 50px;
+  }
+
+  /* Back to Top */
+  .back-to-top {
+    bottom: 75px;
+    right: 12px;
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  /* Greeting Popup */
+  .chatbot-greeting {
+    bottom: 62px !important;
+    padding: 0.4rem 0.8rem !important;
+    max-width: 150px !important;
+  }
+
+  .chatbot-greeting .greeting-text {
+    font-size: 0.75rem !important;
+  }
+
+  .chatbot-greeting .greeting-emoji {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* ===== SAFE AREA FOR NOTCH PHONES ===== */
+@supports (padding: max(0px)) {
+  .chatbot-container {
+    bottom: max(20px, env(safe-area-inset-bottom, 20px));
+    right: max(20px, env(safe-area-inset-right, 20px));
+  }
+
+  .back-to-top {
+    bottom: max(100px, calc(env(safe-area-inset-bottom, 0px) + 80px));
+    right: max(20px, env(safe-area-inset-right, 20px));
+  }
+
+  @media (max-width: 768px) {
+    .chatbot-container {
+      bottom: max(15px, env(safe-area-inset-bottom, 15px));
+      right: max(15px, env(safe-area-inset-right, 15px));
+    }
+
+    .back-to-top {
+      bottom: max(85px, calc(env(safe-area-inset-bottom, 0px) + 70px));
+      right: max(15px, env(safe-area-inset-right, 15px));
+    }
+  }
+
+  @media (max-width: 480px) {
+    .chatbot-container {
+      bottom: max(12px, env(safe-area-inset-bottom, 12px));
+      right: max(12px, env(safe-area-inset-right, 12px));
+    }
+
+    .back-to-top {
+      bottom: max(75px, calc(env(safe-area-inset-bottom, 0px) + 60px));
+      right: max(12px, env(safe-area-inset-right, 12px));
+    }
+  }
+}
+
+/* ===== CHATBOT GREETING POPUP ===== */
+.chatbot-greeting {
+  position: absolute;
+  bottom: 75px;
+  right: 0;
+  background: var(--card-background);
+  border: 2px solid var(--primary-color);
+  border-radius: 20px 20px 20px 4px;
+  padding: 0.8rem 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  animation: greetingBounce 0.6s ease forwards, greetingFloat 3s ease-in-out 0.6s infinite;
+  transition: all 0.3s ease;
+  max-width: 220px;
+  z-index: 9998;
+  white-space: nowrap;
+}
+
+.chatbot-greeting::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 14px solid var(--card-background);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+.chatbot-greeting::before {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  right: 18px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 16px solid var(--primary-color);
+  z-index: -1;
+}
+
+.greeting-content {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.greeting-emoji {
+  font-size: 1.6rem;
+}
+
+.greeting-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+@keyframes greetingBounce {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes greetingFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+
+/* ============================================
+   MOBILE FIXES
+   ============================================ */
+
+/* Fix duplicate section rendering */
+section {
+  display: block;
+  width: 100%;
+}
+
+/* Ensure main content stacks correctly */
+main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Container fix */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  /* Hero */
+  .hero-content {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero-text h2 {
+    font-size: 1.2rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-buttons .btn {
+    width: 80%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  /* About */
+  .about-content {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Experience */
+  .experience-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Skills & Certificates */
+  .skills-categories-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Projects */
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  .carousel-track {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Contact */
+  .contact-content {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  /* Footer */
+  .footer-content {
+    flex-direction: column !important;
+    text-align: center !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 2rem !important;
+  }
+
+  /* Experience card fixes */
+  .experience-card {
+    padding: 1.2rem !important;
+  }
+
+  .experience-description ul li {
+    font-size: 0.9rem !important;
+  }
+
+  /* Social buttons */
+  .social-buttons {
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+  }
+
+  /* Hero status */
+  .hero-status {
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .hero-text h1 {
+    font-size: 1.8rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem !important;
+  }
+
+  .hero-buttons .btn {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .experience-card {
+    padding: 1rem !important;
+  }
+
+  .experience-card .company {
+    font-size: 1rem !important;
+  }
+
+  .experience-card .position {
+    font-size: 0.9rem !important;
+  }
+
+  .experience-description ul li {
+    font-size: 0.8rem !important;
+  }
+
+  /* Tab buttons on mobile */
+  .tab-btn {
+    font-size: 0.75rem !important;
+    padding: 0.3rem 0.5rem !important;
+  }
+
+  .tab-slider-wrapper {
+    padding: 4px !important;
+  }
+
+  /* Certificate cards */
+  .certificate-card {
+    padding: 1rem !important;
+  }
+
+  .certificate-card-title {
+    font-size: 0.9rem !important;
+  }
+
+  .project-card-title {
+    font-size: 0.95rem !important;
+  }
+
+  .project-card-description {
+    font-size: 0.8rem !important;
+  }
+
+  .tech-tag {
+    font-size: 0.6rem !important;
+    padding: 0.1rem 0.4rem !important;
+  }
+
+  .contact-form {
+    padding: 1.2rem !important;
+  }
+
+  .footer-links {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    gap: 1rem !important;
+  }
+}
+
+/* Fix for tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .hero-content {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .about-content {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .experience-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .skills-categories-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .carousel-track {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.5rem !important;
+  }
+
+  .contact-content {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+  }
+}

@@ -36,8 +36,6 @@ function App() {
           <About /> 
            <Experience experiences={experiences} />
            <SkillsCertificates /> 
-          {/* <Experience experiences={experiences} /> */}
-          {/* <Projects projects={projects} /> */}
           <Contact personalInfo={personalInfo} />
         </main>
        
