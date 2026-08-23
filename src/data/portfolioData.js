@@ -9,6 +9,7 @@ import fashion from "../assets/fashion.jpg"
 import xo from "../assets/xo.jpg"
 import snake from "../assets/snake.png"
 
+
 export const personalInfo = {
   name: "Dinesh G",
   title: "Web Developer | Full-Stack Developer",
@@ -17,7 +18,8 @@ export const personalInfo = {
    phone: "+91 9025927823",
   github: "https://github.com/Kkssys",
   linkedin: "https://www.linkedin.com/in/dinesh-g-388174259/",
-  bio: "Motivated Computer Science student with a proactive mindset and a strong passion for continuous learning. I am  skilled in adapting to new technologies, solving complex problems, and working effectively both independently and as part of a team."
+  bio: "Motivated Computer Science student with a proactive mindset and a strong passion for continuous learning. I am  skilled in adapting to new technologies, solving complex problems, and working effectively both independently and as part of a team.",
+  photo: "../assets/profile.jpeg",
 };
 
 export const experiences = [
@@ -29,7 +31,7 @@ export const experiences = [
     description: [
       "Developed and maintained responsive web pages using React, HTML, CSS, and JavaScript.",
         "Assisted in UI development and debugging."],
-    technologies: ["React" , "HTML" , "CSS" , "JavaScript", "Git" , "Mongo DB" ,"Node JS" , "Express JS"]
+    technologies: ["React" , "HTML" , "CSS" , "JavaScript", "Git" , "MongoDB" ,"NodeJS" , "Express JS"]
   },
   {
     id: 2,
@@ -150,3 +152,4 @@ export const projects = [
     image: xo
   }
 ];
+

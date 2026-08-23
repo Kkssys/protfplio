@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import IdCard from './IdCard';
 
 function Hero({ personalInfo }) {
   const [displayText, setDisplayText] = useState('');
@@ -100,15 +101,8 @@ function Hero({ personalInfo }) {
           </div>
           
           <div className="hero-image">
-            <div className="image-placeholder">
-              <img 
-                alt="Coder GIF" 
-                height={250} 
-                width={350} 
-                src="https://miro.medium.com/max/1360/0*7Q3yvSIv_t0ioJ-Z.gif" 
-              />
-            </div>
-          </div>
+  <IdCard personalInfo={personalInfo} />
+</div>
         </div>
       </div>
     </section>

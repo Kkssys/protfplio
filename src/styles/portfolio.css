@@ -1188,11 +1188,40 @@ body.dark-mode .chatbot-input input {
   z-index: 1;
 }
 
-/* Hero Image Area - More Interesting */
+/* ============================================
+   HERO IMAGE - ID CARD POSITIONING
+   ============================================ */
+
+/* Desktop (1025px and above) */
 .hero-image {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  margin-top: -220px;
+}
+
+/* Tablet (769px - 1024px) */
+@media (max-width: 1024px) {
+  .hero-image {
+    align-items: flex-start;
+    margin-top: -150px;  /* Less negative on tablet */
+  }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+  .hero-image {
+    align-items: center;
+    margin-top: 0;
+  }
+}
+
+/* Small Mobile (480px and below) */
+@media (max-width: 480px) {
+  .hero-image {
+    align-items: center;
+    margin-top: 0;
+  }
 }
 
 .hero-image .image-placeholder {
@@ -4557,3 +4586,268 @@ input, textarea, select, .filter-btn,
     font-size: 32pt;
   }
 }
+
+
+
+
+/* ============================================
+   ID CARD - SWAPPED COLORS
+   ============================================ */
+
+.idcard-rig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: flex-start;
+  padding-top: 10px;
+}
+
+/* ===== CLIP ===== */
+.idcard-clip {
+  width: 22px;
+  height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #4a4f58, #36454F);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.idcard-clip-pin {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #d8dce2;
+}
+
+/* ===== LANYARD ===== */
+.lanyard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transform-origin: 50% 0%;
+  margin-top: -1px;
+}
+
+.lanyard.dragging {
+  cursor: grabbing;
+}
+
+.lanyard-strap {
+  width: 30px;
+  height: 150px;
+  background: #d9dbe0;
+  border-radius: 0 0 3px 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06), 0 10px 24px -10px rgba(0, 0, 0, 0.15);
+}
+
+.lanyard-strap span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: 'Courier New', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: #36454F;
+  white-space: nowrap;
+}
+
+.lanyard-buckle {
+  width: 26px;
+  height: 10px;
+  background: linear-gradient(180deg, #6f6f70, #36454F);
+  border-radius: 2px;
+  margin: -1px 0;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
+
+/* ===== ID CARD ===== */
+.id-photo-card {
+  width: 180px;
+  padding: 12px 12px 18px;
+  background: #4a4a4a;
+  border-radius: 5px;
+  box-shadow: 0 26px 50px -16px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.id-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-radius: 3px;
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(255, 255, 255, 0.08), transparent 60%),
+    linear-gradient(155deg, #d9dbe0, #f4f4f2 70%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.id-photo span {
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.02em;
+}
+
+.id-photo-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #f4f4f2;
+  margin: 0;
+}
+
+.id-photo-role {
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-top: 2px;
+}
+
+/* ===== DARK MODE (LIGHT CARD) ===== */
+body.dark-mode .id-photo-card {
+  background: #f4f4f2;
+}
+
+body.dark-mode .id-photo-name {
+  color: #36454F;
+}
+
+body.dark-mode .id-photo-role {
+  color: #6b6f78;
+}
+
+body.dark-mode .idcard-clip {
+  background: linear-gradient(180deg, #d8dce2, #8990a0);
+}
+
+body.dark-mode .lanyard-strap {
+  background: #36454F;
+}
+
+body.dark-mode .lanyard-strap span {
+  color: #d9dbe0;
+}
+
+body.dark-mode .lanyard-buckle {
+  background: linear-gradient(180deg, #cfd4dc, #8a919c);
+}
+
+body.dark-mode .id-photo {
+  background:
+    radial-gradient(120% 140% at 50% 0%, rgba(255, 255, 255, 0.12), transparent 60%),
+    linear-gradient(155deg, #2b2f38, #101216 70%);
+}
+
+body.dark-mode .id-photo span {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body.dark-mode .idcard-clip-pin {
+  background: #4a4f58;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .id-photo-card {
+    width: 160px;
+    padding: 10px 10px 16px;
+  }
+
+  .lanyard-strap {
+    height: 100px;
+    width: 26px;
+  }
+
+  .lanyard-strap span {
+    font-size: 8px;
+  }
+
+  .id-photo span {
+    font-size: 2rem;
+  }
+
+  .id-photo-name {
+    font-size: 0.8rem;
+  }
+
+  .id-photo-role {
+    font-size: 0.55rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .id-photo-card {
+    width: 140px;
+    padding: 8px 8px 14px;
+  }
+
+  .lanyard-strap {
+    height: 80px;
+    width: 22px;
+  }
+
+  .lanyard-strap span {
+    font-size: 7px;
+  }
+
+  .id-photo span {
+    font-size: 1.6rem;
+  }
+
+  .id-photo-name {
+    font-size: 0.7rem;
+  }
+
+  .id-photo-role {
+    font-size: 0.5rem;
+  }
+
+  .idcard-clip {
+    width: 18px;
+    height: 10px;
+  }
+
+  .idcard-clip-pin {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* ===== ID PHOTO IMAGE ===== */
+.id-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 3px;
+  display: block;
+}
+
+/* If you want a circular photo */
+.id-photo-img.circular {
+  border-radius: 50%;
+}
+
+/* If you want a border around the photo */
+.id-photo-img.with-border {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+
+
+

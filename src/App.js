@@ -30,14 +30,18 @@ function App() {
 
         {/* Main content */}
         <Header personalInfo={personalInfo} />
+        
         <main>
           <Hero personalInfo={personalInfo} />
           <About /> 
+           <Experience experiences={experiences} />
            <SkillsCertificates /> 
-          <Experience experiences={experiences} />
+          {/* <Experience experiences={experiences} /> */}
           {/* <Projects projects={projects} /> */}
           <Contact personalInfo={personalInfo} />
         </main>
+       
+
         <Footer personalInfo={personalInfo} />
         <Chatbot />
           <RocketBackToTop /> 
