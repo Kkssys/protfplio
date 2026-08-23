@@ -1,10 +1,16 @@
+// src/components/Chatbot.js
 import React, { useState, useRef, useEffect } from 'react';
-import { FaSync } from 'react-icons/fa';
 import { personalInfo, experiences, projects } from '../data/portfolioData';
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [showGreeting, setShowGreeting] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [isWelcomeVisible, setIsWelcomeVisible] = useState(true);
+  const [hasVideoPlayed, setHasVideoPlayed] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const videoRef = useRef(null);
   const [messages, setMessages] = useState([
     { 
       id: 1, 
@@ -15,41 +21,89 @@ function Chatbot() {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
 
-  // Show greeting after welcome screen
+  // Listen for welcome screen completion
   useEffect(() => {
-    const showTimer = setTimeout(() => {
-      setShowGreeting(true);
-    }, 3500);
+    const checkWelcome = () => {
+      const welcomeElement = document.querySelector('.welcome-screen.visible');
+      const isVisible = !!welcomeElement;
+      setIsWelcomeVisible(isVisible);
 
-    const hideTimer = setTimeout(() => {
-      setShowGreeting(false);
-    }, 8500);
-
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
+      // When welcome screen ends (becomes hidden)
+      if (!isVisible && !hasVideoPlayed) {
+        setShowVideo(true);
+        setHasVideoPlayed(true);
+        // Show greeting shortly after video starts
+        setTimeout(() => {
+          setShowGreeting(true);
+        }, 100);
+      }
     };
-  }, []);
 
+    checkWelcome();
+
+    const observer = new MutationObserver(() => {
+      checkWelcome();
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      subtree: true,
+      attributeFilter: ['class']
+    });
+
+    return () => observer.disconnect();
+  }, [hasVideoPlayed]);
+
+  // Hide greeting when chat opens
   useEffect(() => {
     if (isOpen) {
       setShowGreeting(false);
+      setShowVideo(false);
     }
   }, [isOpen]);
 
+  // Auto-scroll messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Reset chat function
-  const resetChat = () => {
-    setMessages([
-      { 
-        id: Date.now(), 
-        text: "👋 Hi! I'm GD's Asst. Ask me anything about Dinesh!", 
-        sender: 'bot' 
-      }
-    ]);
+  // Auto-play video when it becomes visible
+  useEffect(() => {
+    if (showVideo && videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.log('Video autoplay blocked:', err);
+      });
+    }
+  }, [showVideo]);
+
+  // Preload image
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/images/chatbot-icon.jpeg';
+    img.onload = () => setImageLoaded(true);
+  }, []);
+
+  // Video ended handler - HIDE GREETING AND VIDEO TOGETHER
+  const handleVideoEnd = () => {
+    setVideoEnded(true);
+    setShowGreeting(false); // Greeting disappears immediately
+    // Fade out video after 300ms
+    setTimeout(() => {
+      setShowVideo(false);
+    }, 300);
+  };
+
+  // Skip video on click
+  const handleSkipVideo = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+    setVideoEnded(true);
+    setShowGreeting(false); // Greeting disappears immediately
+    setTimeout(() => {
+      setShowVideo(false);
+    }, 300);
   };
 
   // Helper: extract username from URL
@@ -66,7 +120,6 @@ function Chatbot() {
   const getBotResponse = (userInput) => {
     const lower = userInput.toLowerCase();
 
-    // --- 1. PHONE NUMBER ---
     if (lower.includes('phone') || lower.includes('number') || lower.includes('call')) {
       if (personalInfo.phone && personalInfo.phone !== 'Not available') {
         return `You can reach me at ${personalInfo.phone}`;
@@ -75,7 +128,6 @@ function Chatbot() {
       }
     }
 
-    // --- 2. GITHUB ID ---
     if (lower.includes('github id') || lower.includes('github username')) {
       return `My GitHub username is **${githubUsername}**. You can find my code at ${personalInfo.github}`;
     }
@@ -83,7 +135,6 @@ function Chatbot() {
       return `My GitHub profile: ${personalInfo.github}`;
     }
 
-    // --- 3. LINKEDIN ID ---
     if (lower.includes('linkedin id') || lower.includes('linkedin username')) {
       return `My LinkedIn ID is **${linkedinUsername}**. Connect with me at ${personalInfo.linkedin}`;
     }
@@ -91,12 +142,10 @@ function Chatbot() {
       return `My LinkedIn profile: ${personalInfo.linkedin}`;
     }
 
-    // --- 4. RESUME ---
     if (lower.includes('resume') || lower.includes('cv') || lower.includes('curriculum') || lower.includes('vitae')) {
-      return `<a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" className="chatbot-btn">📄 Download Resume</a>`;
+      return `<a href="/Dinesh_Resume.pdf" download="Dinesh_Resume.pdf" class="chatbot-btn">📄 Download Resume</a>`;
     }
 
-    // --- 5. PROJECTS (specific) - WITH BUTTONS ---
     for (const project of projects) {
       if (lower.includes(project.title.toLowerCase())) {
         let response = `<strong>📁 ${project.title}</strong><br><br>`;
@@ -104,22 +153,20 @@ function Chatbot() {
         response += `<strong>🛠️ Technologies:</strong> ${project.technologies.join(', ')}<br><br>`;
         
         if (project.github) {
-          response += `<a href="${project.github}" target="_blank" rel="noopener noreferrer" className="chatbot-btn">💻 Code</a> `;
+          response += `<a href="${project.github}" target="_blank" rel="noopener noreferrer" class="chatbot-btn">💻 Code</a> `;
         }
         if (project.demo) {
-          response += `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" className="chatbot-btn">🚀 Demo</a>`;
+          response += `<a href="${project.demo}" target="_blank" rel="noopener noreferrer" class="chatbot-btn">🚀 Demo</a>`;
         }
         return response;
       }
     }
 
-    // --- 6. PROJECTS (list) ---
     if (lower.includes('project') || lower.includes('projects') || lower.includes('built') || lower.includes('work')) {
       const projectList = projects.map(p => `• ${p.title}`).join('\n');
       return `Here are my projects:\n${projectList}\n\nWhich one would you like to know more about?`;
     }
 
-    // --- 7. EXPERIENCE (specific) ---
     for (const exp of experiences) {
       if (lower.includes(exp.company.toLowerCase()) || 
           lower.includes(exp.position.toLowerCase())) {
@@ -127,44 +174,36 @@ function Chatbot() {
       }
     }
 
-    // --- 8. EXPERIENCE (list) ---
     if (lower.includes('experience') || lower.includes('intern') || lower.includes('internship') || lower.includes('work')) {
       const expList = experiences.map(e => `• ${e.position} at ${e.company} (${e.duration})`).join('\n');
       return `Here's my experience:\n${expList}\n\nWant to know more about any of these?`;
     }
 
-    // --- 9. SKILLS ---
     if (lower.includes('skill') || lower.includes('tech') || lower.includes('know') || lower.includes('technologies')) {
       const allTech = [...new Set(projects.flatMap(p => p.technologies))];
       return `I work with: ${allTech.join(', ')}`;
     }
 
-    // --- 10. EMAIL ---
     if (lower.includes('email') || lower.includes('mail') || lower.includes('contact')) {
       return `You can email me at ${personalInfo.email}`;
     }
 
-    // --- 11. LOCATION ---
     if (lower.includes('location') || lower.includes('where') || lower.includes('based')) {
       return `I'm based in ${personalInfo.location}`;
     }
 
-    // --- 12. INTRO / BIO ---
     if (lower.includes('intro') || lower.includes('bio') || 
         lower.includes('about') || lower.includes('yourself') || lower.includes('who')) {
       return personalInfo.bio;
     }
 
-    // --- 13. NAME ---
     if (lower.includes('name') || lower.includes('called')) {
       return `My name is ${personalInfo.name}. I'm a ${personalInfo.title}.`;
     }
 
-    // --- 14. FALLBACK ---
     return `I'm not sure about that. You can ask me about:\n• My projects\n• My experience\n• My skills\n• My contact info (email, LinkedIn, GitHub, phone)\n• My resume\n• My location`;
   };
 
-  // ===== SEND MESSAGE =====
   const sendMessage = (e) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -186,38 +225,124 @@ function Chatbot() {
     }, 400);
   };
 
-  // ===== QUICK REPLIES =====
   const quickReplies = [
     "Who are you?",
     "What projects have you built?",
     "Tell me about your experience",
     "What are your skills?",
     "How can I contact you?",
-    // "What's your GitHub ID?",
-    // "What's your LinkedIn ID?",
-    // "What's your phone number?",
+    "What's your GitHub ID?",
+    "What's your LinkedIn ID?",
+    "What's your phone number?",
     "Can I see your resume?"
   ];
 
   const handleGreetingClick = () => {
     setShowGreeting(false);
+    setShowVideo(false);
     setIsOpen(true);
   };
 
+  if (isWelcomeVisible) {
+    return null;
+  }
+
   return (
     <div className="chatbot-container">
+      {/* Greeting Popup - disappears when video ends */}
       {showGreeting && (
         <div className="chatbot-greeting" onClick={handleGreetingClick}>
           <div className="greeting-content">
-            <span className="greeting-emoji"><i className="bi bi-chat-dots"></i></span>
+            <span className="greeting-emoji">🗨️</span>
             <span className="greeting-text">Hi, I'm GD's Asst</span>
           </div>
         </div>
       )}
 
       {!isOpen && (
-        <button className="chatbot-toggle" onClick={() => setIsOpen(true)}>
-         <i className="bi bi-robot"></i>
+        <button 
+          className="chatbot-toggle" 
+          onClick={() => setIsOpen(true)}
+          aria-label="Open chat"
+        >
+          {/* Video layer */}
+          <div 
+            className={`chatbot-video-wrapper ${videoEnded ? 'fade-out' : ''}`}
+            style={{ 
+              opacity: showVideo ? 1 : 0,
+              pointerEvents: showVideo ? 'auto' : 'none',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              transition: 'opacity 0.3s ease',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              zIndex: 2,
+            }}
+          >
+            <video
+              ref={videoRef}
+              src="/videos/chatbot-intro.mp4"
+              muted
+              playsInline
+              onEnded={handleVideoEnd}
+              onClick={handleSkipVideo}
+              className="chatbot-video"
+              loop={false}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+              }}
+            />
+          </div>
+
+          {/* Static Image layer (always present, hidden behind video) */}
+          <div 
+            className="chatbot-image-wrapper"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+          >
+            <img 
+              src="/images/chatbot-icon.jpeg" 
+              alt="Chatbot"
+              className="chatbot-image"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                opacity: imageLoaded ? 1 : 0,
+                transition: 'opacity 0.3s ease',
+              }}
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.parentElement.innerHTML = '💬';
+              }}
+            />
+          </div>
+
+          <span 
+            className="chatbot-fallback"
+            style={{
+              position: 'absolute',
+              zIndex: 0,
+              fontSize: '2rem',
+              opacity: 0.5,
+              display: 'none',
+            }}
+          >
+            💬
+          </span>
         </button>
       )}
 
@@ -225,12 +350,7 @@ function Chatbot() {
         <div className="chatbot-window">
           <div className="chatbot-header">
             <span>🤖 GD's Asst</span>
-            <div className="chatbot-header-actions">
-              <button className="chatbot-refresh" onClick={resetChat} aria-label="Reset chat">
-               <i className="bi bi-arrow-clockwise"></i>
-              </button>
-              <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
-            </div>
+            <button className="chatbot-close" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 
           <div className="chatbot-messages">

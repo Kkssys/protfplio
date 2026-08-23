@@ -4851,3 +4851,118 @@ body.dark-mode .idcard-clip-pin {
 
 
 
+/* ============================================
+   CHATBOT VIDEO BUTTON
+   ============================================ */
+
+.chatbot-toggle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+}
+
+.chatbot-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.chatbot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.chatbot-toggle:not(:has(img)):not(:has(video)) {
+  font-size: 2.5rem;
+}
+
+
+
+/* ============================================
+   CHATBOT VIDEO/IMAGE TRANSITION
+   ============================================ */
+
+.chatbot-toggle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+}
+
+.chatbot-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.chatbot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Fade out animation for video */
+.chatbot-video-wrapper.fade-out {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Remove blink by having both layers */
+.chatbot-video-wrapper,
+.chatbot-image-wrapper {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .chatbot-toggle {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-toggle {
+    width: 50px;
+    height: 50px;
+  }
+}
