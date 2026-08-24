@@ -1,7 +1,7 @@
 // src/components/IdCard.js
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
-import profilePhoto from '../assets/profile2.jpeg';
+import profilePhoto from '../assets/profile3.png';
 
 function IdCard({ personalInfo }) {
   const clipRef = useRef(null);

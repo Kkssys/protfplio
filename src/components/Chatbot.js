@@ -280,9 +280,6 @@ function Chatbot() {
     "Tell me about your experience",
     "What are your skills?",
     "How can I contact you?",
-    "What's your GitHub ID?",
-    "What's your LinkedIn ID?",
-    "What's your phone number?",
     "Can I see your resume?"
   ];
 
