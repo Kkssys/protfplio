@@ -24,6 +24,7 @@ body {
     sans-serif;
   color: var(--text-color);
   line-height: 1.6;
+   overflow-x: hidden;
 }
 
 .container {
@@ -92,6 +93,8 @@ body {
 
 /* Hero Section */
 .hero {
+   position: relative;
+   overflow-x: hidden;
   padding: 80px 0;
   background: linear-gradient(135deg, var(--light-background) 0%, var(--background) 100%);
 }
@@ -5762,4 +5765,146 @@ main {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* ============================================
+   MOBILE VIEW - FIX EXTRA SPACE
+   ============================================ */
+
+/* Reset all margins and paddings for mobile */
+@media (max-width: 768px) {
+  /* Remove extra space from hero section */
+  .hero {
+    padding: 40px 0 !important;
+    min-height: auto !important;
+  }
+
+  /* Fix hero content spacing */
+  .hero-content {
+    gap: 1.5rem !important;
+    align-items: center !important;
+  }
+
+  /* Fix hero image container */
+  .hero-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Fix ID card container */
+  .idcard-rig {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    transform: none !important;
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  /* Fix ID card itself */
+  .id-photo-card {
+    width: 160px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Remove extra space from sections */
+  section {
+    padding: 40px 0 !important;
+  }
+
+  /* Fix container padding */
+  .container {
+    padding: 0 16px !important;
+  }
+
+  /* Remove extra space from main */
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Fix about section */
+  .about-section {
+    padding: 40px 0 !important;
+  }
+
+  .about-content {
+    gap: 1.5rem !important;
+  }
+
+  /* Fix experience section */
+  .experience-section {
+    padding: 40px 0 !important;
+  }
+
+  .experience-grid {
+    gap: 1rem !important;
+  }
+
+  /* Fix skills section */
+  .skills-section {
+    padding: 40px 0 !important;
+  }
+
+  /* Fix certificates section */
+  .certificates-section {
+    padding: 40px 0 !important;
+  }
+
+  /* Fix projects section */
+  .projects-section {
+    padding: 40px 0 !important;
+  }
+
+  /* Fix contact section */
+  .contact-section {
+    padding: 40px 0 !important;
+  }
+
+  /* Fix footer */
+  .footer {
+    padding: 30px 0 !important;
+  }
+
+  /* Fix section titles */
+  .section-title {
+    margin-bottom: 1.5rem !important;
+    font-size: 1.8rem !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .hero {
+    padding: 30px 0 !important;
+  }
+
+  .hero-content {
+    gap: 1rem !important;
+  }
+
+  .id-photo-card {
+    width: 140px !important;
+  }
+
+  section {
+    padding: 30px 0 !important;
+  }
+
+  .section-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .container {
+    padding: 0 12px !important;
+  }
+}
+
+@media (max-width: 768px) {
+    .bulb-glow {
+        display: none;
+    }
 }
